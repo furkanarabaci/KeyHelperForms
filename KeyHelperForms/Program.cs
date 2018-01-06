@@ -12,7 +12,7 @@ namespace KeyHelperForms
     static class Program
     {
         const UInt32 WM_KEYDOWN = 0x0100;
-        const int VK_F5 = 0x74;
+        const int VK_F4 = 0x73;
 
         [DllImport("user32.dll")]
         static extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
@@ -22,13 +22,13 @@ namespace KeyHelperForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
             while (true)
             {
-                Process[] processes = Process.GetProcessesByName("opera");
+                Process[] processes = Process.GetProcessesByName("PVO_Client");
                 foreach(Process proc in processes)
                 {
-                    PostMessage(proc.MainWindowHandle, WM_KEYDOWN, VK_F5, 0);
+                    PostMessage(proc.MainWindowHandle, WM_KEYDOWN, VK_F4, 0);
                     Thread.Sleep(1000);
                 }
             }
