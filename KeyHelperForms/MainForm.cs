@@ -15,27 +15,33 @@ namespace KeyHelperForms
 {
     public partial class MainForm : Form
     {
+        bool startState = false;
         KeyThread threadHelper;
+        KeyThread threadHelper2;
         public MainForm()
         {
             InitializeComponent();
+            threadHelper = new KeyThread(Variables.VK_KEY_1);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            threadHelper = new KeyThread();
+            
         }
 
         private void button_StartStop_Click(object sender, EventArgs e)
         {
-            if (threadHelper.isThreadWorking())
+            threadHelper.Start();
+            if (!startState)
             {
                 button_StartStop.Text = "Stop";
+                startState = true;
             }
             else
             {
+                threadHelper.Stop();
                 button_StartStop.Text = "Start";
-                //Thread will stop itself.
+                startState = false;
             }
         }
         
