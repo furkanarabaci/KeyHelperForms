@@ -16,12 +16,17 @@ namespace KeyHelperForms
     public partial class MainForm : Form
     {
         bool startState = false;
-        KeyThread threadHelper;
-        KeyThread threadHelper2;
+        List<bool> checkState;
+        KeyThreadArray threadHelperArray;
         public MainForm()
         {
             InitializeComponent();
-            threadHelper = new KeyThread(Variables.VK_KEY_1);
+            checkState = new List<bool>();
+            for(int i = 0; i < 10; i++)
+            {
+                checkState.Add(false); //I am too lazy to use LINQ.
+            }
+            threadHelperArray = new KeyThreadArray();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -31,7 +36,8 @@ namespace KeyHelperForms
 
         private void button_StartStop_Click(object sender, EventArgs e)
         {
-            threadHelper.Start();
+            threadHelperArray.ChangeChecks(checkState);
+            threadHelperArray.StartAll();
             if (!startState)
             {
                 button_StartStop.Text = "Stop";
@@ -39,11 +45,69 @@ namespace KeyHelperForms
             }
             else
             {
-                threadHelper.Stop();
+                threadHelperArray.StopAll();
                 button_StartStop.Text = "Start";
                 startState = false;
             }
         }
-        
+        private void ChangeState(CheckBox currentCheckBox, int index )
+        {
+            if (currentCheckBox.Checked)
+            {
+                checkState[index] = true;
+            }
+            else
+            {
+                checkState[index] = false;
+            }
+        }
+        private void checkBox_key1_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key1, 0);
+        }
+
+        private void checkBox_key2_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key2, 1);
+        }
+
+        private void checkBox_key3_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key3, 2);
+        }
+
+        private void checkBox_key4_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key4, 3);
+        }
+
+        private void checkBox_key5_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key5, 4);
+        }
+
+        private void checkBox_key6_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key6, 5);
+        }
+
+        private void checkBox_key7_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key7, 6);
+        }
+        private void checkBox_key8_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key8, 7);
+        }
+
+        private void checkBox_key9_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key9, 8);
+        }
+
+        private void checkBox_key0_CheckedChanged(object sender, EventArgs e)
+        {
+            ChangeState(checkBox_key0, 9);
+        }
     }
 }

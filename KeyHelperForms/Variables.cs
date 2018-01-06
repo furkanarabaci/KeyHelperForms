@@ -22,5 +22,21 @@ namespace KeyHelperForms
         public const int VK_KEY_8 = 0x38;
         public const int VK_KEY_9 = 0x39;
         public static int sleepTime = 1000;
+        public static List<int> KeyList() //Starts from 1, ends with 0
+        {
+            return new List<int>
+            {
+                VK_KEY_1,
+                VK_KEY_2,
+                VK_KEY_3,
+                VK_KEY_4,
+                VK_KEY_5,
+                VK_KEY_6,
+                VK_KEY_7,
+                VK_KEY_8,
+                VK_KEY_9,
+                VK_KEY_0
+            };
+        }
     }
 }
