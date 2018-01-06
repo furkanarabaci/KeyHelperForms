@@ -28,21 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.button_StartStop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Form1
+            // button_StartStop
+            // 
+            this.button_StartStop.Location = new System.Drawing.Point(158, 239);
+            this.button_StartStop.Name = "button_StartStop";
+            this.button_StartStop.Size = new System.Drawing.Size(75, 23);
+            this.button_StartStop.TabIndex = 0;
+            this.button_StartStop.Text = "Start";
+            this.button_StartStop.UseVisualStyleBackColor = true;
+            this.button_StartStop.Click += new System.EventHandler(this.button_StartStop_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ClientSize = new System.Drawing.Size(402, 334);
+            this.Controls.Add(this.button_StartStop);
+            this.Name = "MainForm";
+            this.Text = "KeyHelper";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button button_StartStop;
     }
 }
 
