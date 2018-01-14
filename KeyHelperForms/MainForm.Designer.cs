@@ -40,18 +40,16 @@
             this.checkBox_key8 = new System.Windows.Forms.CheckBox();
             this.checkBox_key9 = new System.Windows.Forms.CheckBox();
             this.checkBox_key0 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.PIDColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_StartStop
             // 
-            this.button_StartStop.Location = new System.Drawing.Point(326, 12);
+            this.button_StartStop.Location = new System.Drawing.Point(259, 58);
             this.button_StartStop.Name = "button_StartStop";
             this.button_StartStop.Size = new System.Drawing.Size(75, 23);
             this.button_StartStop.TabIndex = 0;
@@ -117,7 +115,7 @@
             // checkBox_key6
             // 
             this.checkBox_key6.AutoSize = true;
-            this.checkBox_key6.Location = new System.Drawing.Point(12, 47);
+            this.checkBox_key6.Location = new System.Drawing.Point(196, 12);
             this.checkBox_key6.Name = "checkBox_key6";
             this.checkBox_key6.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key6.TabIndex = 6;
@@ -128,7 +126,7 @@
             // checkBox_key7
             // 
             this.checkBox_key7.AutoSize = true;
-            this.checkBox_key7.Location = new System.Drawing.Point(50, 47);
+            this.checkBox_key7.Location = new System.Drawing.Point(234, 12);
             this.checkBox_key7.Name = "checkBox_key7";
             this.checkBox_key7.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key7.TabIndex = 7;
@@ -139,7 +137,7 @@
             // checkBox_key8
             // 
             this.checkBox_key8.AutoSize = true;
-            this.checkBox_key8.Location = new System.Drawing.Point(88, 47);
+            this.checkBox_key8.Location = new System.Drawing.Point(272, 12);
             this.checkBox_key8.Name = "checkBox_key8";
             this.checkBox_key8.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key8.TabIndex = 8;
@@ -150,7 +148,7 @@
             // checkBox_key9
             // 
             this.checkBox_key9.AutoSize = true;
-            this.checkBox_key9.Location = new System.Drawing.Point(126, 47);
+            this.checkBox_key9.Location = new System.Drawing.Point(302, 12);
             this.checkBox_key9.Name = "checkBox_key9";
             this.checkBox_key9.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key9.TabIndex = 9;
@@ -161,7 +159,7 @@
             // checkBox_key0
             // 
             this.checkBox_key0.AutoSize = true;
-            this.checkBox_key0.Location = new System.Drawing.Point(158, 47);
+            this.checkBox_key0.Location = new System.Drawing.Point(340, 12);
             this.checkBox_key0.Name = "checkBox_key0";
             this.checkBox_key0.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key0.TabIndex = 10;
@@ -169,23 +167,13 @@
             this.checkBox_key0.UseVisualStyleBackColor = true;
             this.checkBox_key0.CheckedChanged += new System.EventHandler(this.checkBox_key0_CheckedChanged);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(211, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "ProcessList";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PIDColumn,
             this.nameColumn});
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(12, 79);
+            this.listView1.Location = new System.Drawing.Point(12, 58);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(241, 260);
             this.listView1.TabIndex = 12;
@@ -206,7 +194,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(280, 79);
+            this.button2.Location = new System.Drawing.Point(259, 90);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -216,21 +204,12 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(280, 108);
+            this.button3.Location = new System.Drawing.Point(259, 119);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 14;
             this.button3.Text = "Show";
             this.button3.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(441, 170);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "label1";
             // 
             // MainForm
             // 
@@ -238,11 +217,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(790, 426);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox_key0);
             this.Controls.Add(this.checkBox_key9);
             this.Controls.Add(this.checkBox_key8);
@@ -277,13 +254,11 @@
         private System.Windows.Forms.CheckBox checkBox_key8;
         private System.Windows.Forms.CheckBox checkBox_key9;
         private System.Windows.Forms.CheckBox checkBox_key0;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader nameColumn;
         private System.Windows.Forms.ColumnHeader PIDColumn;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label1;
     }
 }
 
