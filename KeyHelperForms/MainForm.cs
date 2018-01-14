@@ -31,7 +31,32 @@ namespace KeyHelperForms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+
             
+            loadProcessList();
+         
+        }
+
+        private void loadProcessList()
+        {
+            listView1.Items.Clear();
+
+            Process[] processList = Process.GetProcesses();
+            foreach (Process process in processList)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = process.Id.ToString();
+                item.SubItems.Add(process.ProcessName);
+
+                item.Tag = process;
+                listView1.Items.Add(item);
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+          
         }
 
         private void button_StartStop_Click(object sender, EventArgs e)
@@ -108,6 +133,16 @@ namespace KeyHelperForms
         private void checkBox_key0_CheckedChanged(object sender, EventArgs e)
         {
             ChangeState(checkBox_key0, 9);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+             string pText = listView1.SelectedItems[0].SubItems[0].Text;
+
+             pText = label1.Text;
+            
+
         }
     }
 }

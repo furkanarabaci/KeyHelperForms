@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button_StartStop = new System.Windows.Forms.Button();
             this.checkBox_key1 = new System.Windows.Forms.CheckBox();
             this.checkBox_key2 = new System.Windows.Forms.CheckBox();
@@ -39,11 +40,18 @@
             this.checkBox_key8 = new System.Windows.Forms.CheckBox();
             this.checkBox_key9 = new System.Windows.Forms.CheckBox();
             this.checkBox_key0 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.PIDColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.nameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_StartStop
             // 
-            this.button_StartStop.Location = new System.Drawing.Point(63, 88);
+            this.button_StartStop.Location = new System.Drawing.Point(326, 12);
             this.button_StartStop.Name = "button_StartStop";
             this.button_StartStop.Size = new System.Drawing.Size(75, 23);
             this.button_StartStop.TabIndex = 0;
@@ -161,11 +169,80 @@
             this.checkBox_key0.UseVisualStyleBackColor = true;
             this.checkBox_key0.CheckedChanged += new System.EventHandler(this.checkBox_key0_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(211, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "ProcessList";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.PIDColumn,
+            this.nameColumn});
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(12, 79);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(241, 260);
+            this.listView1.TabIndex = 12;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // PIDColumn
+            // 
+            this.PIDColumn.DisplayIndex = 1;
+            this.PIDColumn.Text = "PID";
+            this.PIDColumn.Width = 110;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.DisplayIndex = 0;
+            this.nameColumn.Text = "Name";
+            this.nameColumn.Width = 127;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(280, 79);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "Hide";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(280, 108);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 14;
+            this.button3.Text = "Show";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(441, 170);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "label1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(191, 123);
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.ClientSize = new System.Drawing.Size(790, 426);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox_key0);
             this.Controls.Add(this.checkBox_key9);
             this.Controls.Add(this.checkBox_key8);
@@ -177,6 +254,8 @@
             this.Controls.Add(this.checkBox_key2);
             this.Controls.Add(this.checkBox_key1);
             this.Controls.Add(this.button_StartStop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "KeyHelper";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -198,6 +277,13 @@
         private System.Windows.Forms.CheckBox checkBox_key8;
         private System.Windows.Forms.CheckBox checkBox_key9;
         private System.Windows.Forms.CheckBox checkBox_key0;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader nameColumn;
+        private System.Windows.Forms.ColumnHeader PIDColumn;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label1;
     }
 }
 
