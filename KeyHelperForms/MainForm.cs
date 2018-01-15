@@ -39,18 +39,36 @@ namespace KeyHelperForms
 
         private void loadProcessList()
         {
-            listView1.Items.Clear();
 
-            Process[] processList = Process.GetProcesses();
-            foreach (Process process in processList)
+            try
             {
-                ListViewItem item = new ListViewItem();
-                item.Text = process.Id.ToString();
-                item.SubItems.Add(process.ProcessName);
 
-                item.Tag = process;
-                listView1.Items.Add(item);
+                listView1.BeginUpdate();
 
+                Process[] processList = Process.GetProcesses();
+
+                foreach (Process process in processList)
+                {
+                    ListViewItem item = new ListViewItem();
+
+
+                    if (process.ProcessName.ToString() == "PVO_Client")
+                    {
+                        item.SubItems.Add(process.ProcessName);
+                        item.Text = process.Id.ToString();
+                        item.Tag = process;
+                        listView1.Items.Add(item);
+
+                    }
+
+
+                }
+            }
+
+
+            finally
+            {
+                listView1.EndUpdate();
             }
         }
 
@@ -135,14 +153,9 @@ namespace KeyHelperForms
             ChangeState(checkBox_key0, 9);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
-
-             string pText = listView1.SelectedItems[0].SubItems[0].Text;
-
-             pText = label1.Text;
-            
-
+            listView1.Refresh();
         }
     }
 }

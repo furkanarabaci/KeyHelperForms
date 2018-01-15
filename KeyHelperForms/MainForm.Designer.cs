@@ -43,13 +43,14 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.PIDColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnHide = new System.Windows.Forms.Button();
+            this.btnShow = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_StartStop
             // 
-            this.button_StartStop.Location = new System.Drawing.Point(259, 58);
+            this.button_StartStop.Location = new System.Drawing.Point(259, 83);
             this.button_StartStop.Name = "button_StartStop";
             this.button_StartStop.Size = new System.Drawing.Size(75, 23);
             this.button_StartStop.TabIndex = 0;
@@ -192,33 +193,45 @@
             this.nameColumn.Text = "Name";
             this.nameColumn.Width = 127;
             // 
-            // button2
+            // btnHide
             // 
-            this.button2.Location = new System.Drawing.Point(259, 90);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Hide";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnHide.Location = new System.Drawing.Point(259, 115);
+            this.btnHide.Name = "btnHide";
+            this.btnHide.Size = new System.Drawing.Size(75, 23);
+            this.btnHide.TabIndex = 13;
+            this.btnHide.Text = "Hide";
+            this.btnHide.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnShow
             // 
-            this.button3.Location = new System.Drawing.Point(259, 119);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "Show";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnShow.Location = new System.Drawing.Point(259, 144);
+            this.btnShow.Name = "btnShow";
+            this.btnShow.Size = new System.Drawing.Size(75, 23);
+            this.btnShow.TabIndex = 14;
+            this.btnShow.Text = "Show";
+            this.btnShow.UseVisualStyleBackColor = true;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImage = global::KeyHelperForms.Properties.Resources.refresh;
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnRefresh.Location = new System.Drawing.Point(260, 58);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(26, 23);
+            this.btnRefresh.TabIndex = 15;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(790, 426);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(581, 336);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnShow);
+            this.Controls.Add(this.btnHide);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.checkBox_key0);
             this.Controls.Add(this.checkBox_key9);
@@ -257,8 +270,9 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader nameColumn;
         private System.Windows.Forms.ColumnHeader PIDColumn;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnHide;
+        private System.Windows.Forms.Button btnShow;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 
