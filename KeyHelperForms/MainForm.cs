@@ -13,68 +13,91 @@ using System.Diagnostics;
 
 namespace KeyHelperForms
 {
+
     public partial class MainForm : Form
     {
+       //Memory read and some magic.
+        const int PROCESS_WM_READ = 0x0010;
+
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+
+        [DllImport("kernel32.dll")]
+        public static extern bool ReadProcessMemory(int hProcess,
+        int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
+
+
+        //Keypress things.
         bool startState = false;
         List<bool> checkState;
         KeyThreadArray threadHelperArray;
+
+
         public MainForm()
         {
+
             InitializeComponent();
             checkState = new List<bool>();
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 checkState.Add(false); //I am too lazy to use LINQ.
             }
             threadHelperArray = new KeyThreadArray();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void RAMReader()
         {
 
-            
-            loadProcessList();
-         
+            Process process = Process.GetProcessesByName("PVO_Client")[0];
+            IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
+
+            int bytesRead = 0;
+            byte[] buffer = new byte[1024];  
+
+            ReadProcessMemory((int)processHandle, 0x010916BF , buffer, buffer.Length, ref bytesRead);
+            richTextBox1.Text = Encoding.ASCII.GetString(buffer);
+
+            ListViewItem itm = new ListViewItem();
+        
+            itm.SubItems.Add(Encoding.ASCII.GetString(buffer));
+
+
+            // txtOffset.Text += BitConverter.ToString(buffer); >>> offset things.
+
         }
+
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            loadProcessList();
+        }
+
 
         private void loadProcessList()
         {
+            Process[] processList = Process.GetProcesses();
 
-            try
+            foreach (Process process in processList)
             {
+               ListViewItem item = new ListViewItem();
 
-                listView1.BeginUpdate();
-
-                Process[] processList = Process.GetProcesses();
-
-                foreach (Process process in processList)
+                if (process.ProcessName.ToString() == "PVO_Client")
                 {
-                    ListViewItem item = new ListViewItem();
-
-
-                    if (process.ProcessName.ToString() == "PVO_Client")
-                    {
-                        item.SubItems.Add(process.ProcessName);
-                        item.Text = process.Id.ToString();
-                        item.Tag = process;
-                        listView1.Items.Add(item);
-
-                    }
-
+                    item.SubItems.Add(process.ProcessName);
+                    item.Text = process.Id.ToString();
+                    item.Tag = process;
+                    listView1.Items.Add(item);
 
                 }
             }
-
-
-            finally
-            {
-                listView1.EndUpdate();
-            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
-          
+
+
+
         }
 
         private void button_StartStop_Click(object sender, EventArgs e)
@@ -93,7 +116,7 @@ namespace KeyHelperForms
                 startState = false;
             }
         }
-        private void ChangeState(CheckBox currentCheckBox, int index )
+        private void ChangeState(CheckBox currentCheckBox, int index)
         {
             if (currentCheckBox.Checked)
             {
@@ -153,9 +176,11 @@ namespace KeyHelperForms
             ChangeState(checkBox_key0, 9);
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private void btnOffset_Click(object sender, EventArgs e)
         {
-            listView1.Refresh();
+            RAMReader();
+           
         }
+
     }
 }
