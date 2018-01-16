@@ -47,6 +47,11 @@
             this.btnHide = new System.Windows.Forms.Button();
             this.btnShow = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnOffset = new System.Windows.Forms.Button();
+            this.txtOffset = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_StartStop
@@ -230,12 +235,60 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // btnOffset
+            // 
+            this.btnOffset.Location = new System.Drawing.Point(407, 58);
+            this.btnOffset.Name = "btnOffset";
+            this.btnOffset.Size = new System.Drawing.Size(75, 23);
+            this.btnOffset.TabIndex = 17;
+            this.btnOffset.Text = "Offset";
+            this.btnOffset.UseVisualStyleBackColor = true;
+            this.btnOffset.Click += new System.EventHandler(this.btnOffset_Click);
+            // 
+            // txtOffset
+            // 
+            this.txtOffset.Location = new System.Drawing.Point(407, 217);
+            this.txtOffset.Name = "txtOffset";
+            this.txtOffset.Size = new System.Drawing.Size(100, 20);
+            this.txtOffset.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(513, 220);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Offset";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(407, 87);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(153, 124);
+            this.richTextBox1.TabIndex = 20;
+            this.richTextBox1.Text = "";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(443, 244);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "label2";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(409, 337);
+            this.ClientSize = new System.Drawing.Size(778, 422);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtOffset);
+            this.Controls.Add(this.btnOffset);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.btnHide);
@@ -280,7 +333,12 @@
         private System.Windows.Forms.Button btnHide;
         private System.Windows.Forms.Button btnShow;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnOffset;
+        private System.Windows.Forms.TextBox txtOffset;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ColumnHeader CharColumn;
+        private System.Windows.Forms.Label label2;
     }
 }
 
