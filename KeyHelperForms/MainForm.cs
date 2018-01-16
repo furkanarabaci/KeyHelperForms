@@ -48,43 +48,26 @@ namespace KeyHelperForms
         private void RAMReader()
         {
 
-            Process process = Process.GetProcessesByName("PVO_Client")[0];
-            IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
 
-            int bytesRead = 0;
-            byte[] buffer = new byte[1024];  
-
-            ReadProcessMemory((int)processHandle, 0x010916BF , buffer, buffer.Length, ref bytesRead);
-            richTextBox1.Text = Encoding.ASCII.GetString(buffer);
-
-            ListViewItem itm = new ListViewItem();
-        
-            itm.SubItems.Add(Encoding.ASCII.GetString(buffer));
-
-
-            // txtOffset.Text += BitConverter.ToString(buffer); >>> offset things.
-
-        }
-
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            loadProcessList();
-        }
-
-
-        private void loadProcessList()
-        {
             Process[] processList = Process.GetProcesses();
 
             foreach (Process process in processList)
             {
-               ListViewItem item = new ListViewItem();
+                ListViewItem item = new ListViewItem();
 
                 if (process.ProcessName.ToString() == "PVO_Client")
                 {
+                    IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
+
+                    int bytesRead = 0;
+                    byte[] buffer = new byte[1024];
+
+                    ReadProcessMemory((int)processHandle, 0x010916BF, buffer, buffer.Length, ref bytesRead);
+
+
                     item.SubItems.Add(process.ProcessName);
                     item.Text = process.Id.ToString();
+                    item.SubItems.Add(Encoding.ASCII.GetString(buffer));
                     item.Tag = process;
                     listView1.Items.Add(item);
 
@@ -93,11 +76,14 @@ namespace KeyHelperForms
         }
 
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+        RAMReader();
+        }
+
+
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-
-
-
         }
 
         private void button_StartStop_Click(object sender, EventArgs e)
