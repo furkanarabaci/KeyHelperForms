@@ -16,16 +16,6 @@ namespace KeyHelperForms
 
     public partial class MainForm : Form
     {
-       //Memory read and some magic.
-        const int PROCESS_WM_READ = 0x0010;
-
-        [DllImport("kernel32.dll")]
-        public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
-
-        [DllImport("kernel32.dll")]
-        public static extern bool ReadProcessMemory(int hProcess,
-        int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
-
 
         //Keypress things.
         bool startState = false;
@@ -45,58 +35,13 @@ namespace KeyHelperForms
             threadHelperArray = new KeyThreadArray();
         }
 
-        private void RAMReader()
-        {
-
-            Process process = Process.GetProcessesByName("PVO_Client")[0];
-            IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
-
-            int bytesRead = 0;
-            byte[] buffer = new byte[1024];  
-
-            ReadProcessMemory((int)processHandle, 0x010916BF , buffer, buffer.Length, ref bytesRead);
-            richTextBox1.Text = Encoding.ASCII.GetString(buffer);
-
-            ListViewItem itm = new ListViewItem();
-        
-            itm.SubItems.Add(Encoding.ASCII.GetString(buffer));
-
-
-            // txtOffset.Text += BitConverter.ToString(buffer); >>> offset things.
-
-        }
-
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             loadProcessList();
         }
-
-
-        private void loadProcessList()
-        {
-            Process[] processList = Process.GetProcesses();
-
-            foreach (Process process in processList)
-            {
-               ListViewItem item = new ListViewItem();
-
-                if (process.ProcessName.ToString() == "PVO_Client")
-                {
-                    item.SubItems.Add(process.ProcessName);
-                    item.Text = process.Id.ToString();
-                    item.Tag = process;
-                    listView1.Items.Add(item);
-
-                }
-            }
-        }
-
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-
-
 
         }
 
@@ -178,9 +123,20 @@ namespace KeyHelperForms
 
         private void btnOffset_Click(object sender, EventArgs e)
         {
+            listView1.Clear();
             RAMReader();
-           
+            loadProcessList();
         }
-
+        private bool DoPIDExistInListView(string pid)
+        {
+            //ListView structure -> 0 : name, 1 : pid, 2 : char 
+            foreach(ListViewItem item in listView1.Items)
+            {
+                if (item.SubItems[1].ToString().Equals(pid)){
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
