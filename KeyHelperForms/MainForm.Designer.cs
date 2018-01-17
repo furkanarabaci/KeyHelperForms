@@ -47,16 +47,13 @@
             this.btnHide = new System.Windows.Forms.Button();
             this.btnShow = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnOffset = new System.Windows.Forms.Button();
-            this.txtOffset = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.HpColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MpColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button_StartStop
             // 
-            this.button_StartStop.Location = new System.Drawing.Point(301, 83);
+            this.button_StartStop.Location = new System.Drawing.Point(545, 92);
             this.button_StartStop.Name = "button_StartStop";
             this.button_StartStop.Size = new System.Drawing.Size(75, 23);
             this.button_StartStop.TabIndex = 0;
@@ -179,11 +176,13 @@
             this.listView_Characters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PIDColumn,
             this.nameColumn,
-            this.CharColumn});
+            this.CharColumn,
+            this.HpColumn,
+            this.MpColumn});
             this.listView_Characters.FullRowSelect = true;
             this.listView_Characters.Location = new System.Drawing.Point(12, 58);
             this.listView_Characters.Name = "listView_Characters";
-            this.listView_Characters.Size = new System.Drawing.Size(284, 260);
+            this.listView_Characters.Size = new System.Drawing.Size(466, 260);
             this.listView_Characters.TabIndex = 12;
             this.listView_Characters.UseCompatibleStateImageBehavior = false;
             this.listView_Characters.View = System.Windows.Forms.View.Details;
@@ -203,11 +202,11 @@
             // CharColumn
             // 
             this.CharColumn.Text = "Char";
-            this.CharColumn.Width = 45;
+            this.CharColumn.Width = 95;
             // 
             // btnHide
             // 
-            this.btnHide.Location = new System.Drawing.Point(301, 115);
+            this.btnHide.Location = new System.Drawing.Point(545, 124);
             this.btnHide.Name = "btnHide";
             this.btnHide.Size = new System.Drawing.Size(75, 23);
             this.btnHide.TabIndex = 13;
@@ -216,7 +215,7 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(301, 144);
+            this.btnShow.Location = new System.Drawing.Point(545, 153);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(75, 23);
             this.btnShow.TabIndex = 14;
@@ -228,55 +227,24 @@
             this.btnRefresh.BackgroundImage = global::KeyHelperForms.Properties.Resources.refresh;
             this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btnRefresh.Location = new System.Drawing.Point(302, 58);
+            this.btnRefresh.Location = new System.Drawing.Point(546, 67);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(26, 23);
             this.btnRefresh.TabIndex = 15;
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // btnOffset
+            // HpColumn
             // 
-            this.btnOffset.Location = new System.Drawing.Point(407, 58);
-            this.btnOffset.Name = "btnOffset";
-            this.btnOffset.Size = new System.Drawing.Size(75, 23);
-            this.btnOffset.TabIndex = 17;
-            this.btnOffset.Text = "Offset";
-            this.btnOffset.UseVisualStyleBackColor = true;
-            this.btnOffset.Click += new System.EventHandler(this.btnOffset_Click);
+            this.HpColumn.Tag = "";
+            this.HpColumn.Text = "HP";
+            this.HpColumn.Width = 111;
             // 
-            // txtOffset
+            // MpColumn
             // 
-            this.txtOffset.Location = new System.Drawing.Point(407, 217);
-            this.txtOffset.Name = "txtOffset";
-            this.txtOffset.Size = new System.Drawing.Size(100, 20);
-            this.txtOffset.TabIndex = 18;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(513, 220);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Offset";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(407, 87);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(153, 124);
-            this.richTextBox1.TabIndex = 20;
-            this.richTextBox1.Text = "";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(443, 244);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "label2";
+            this.MpColumn.Tag = "";
+            this.MpColumn.Text = "MP";
+            this.MpColumn.Width = 95;
             // 
             // MainForm
             // 
@@ -284,11 +252,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(778, 422);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtOffset);
-            this.Controls.Add(this.btnOffset);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.btnHide);
@@ -333,12 +296,9 @@
         private System.Windows.Forms.Button btnHide;
         private System.Windows.Forms.Button btnShow;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Button btnOffset;
-        private System.Windows.Forms.TextBox txtOffset;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ColumnHeader CharColumn;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader HpColumn;
+        private System.Windows.Forms.ColumnHeader MpColumn;
     }
 }
 
