@@ -42,6 +42,8 @@ namespace KeyHelperForms
 
         private void button_StartStop_Click(object sender, EventArgs e)
         {
+
+
             threadHelperArray.ChangeChecks(checkState);
             threadHelperArray.StartAll();
             if (!startState)
