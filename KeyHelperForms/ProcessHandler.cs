@@ -28,7 +28,6 @@ namespace KeyHelperForms
         public string ReadAddress(Process process, int addressValue)
         {
             //Address value in hexadecimal. The variable address points can vary, so use it at your own risk.
-            //Process process = Process.GetProcessesByName(Variables.processName)[0];
             IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
 
             int bytesRead = 0;

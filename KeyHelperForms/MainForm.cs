@@ -42,8 +42,6 @@ namespace KeyHelperForms
 
         private void button_StartStop_Click(object sender, EventArgs e)
         {
-
-
             threadHelperArray.ChangeChecks(checkState);
             threadHelperArray.StartAll();
             if (!startState)
@@ -120,16 +118,12 @@ namespace KeyHelperForms
 
         private void btnOffset_Click(object sender, EventArgs e)
         {
-            listView_Characters.Clear();
-            //RAMReader();
-            //loadProcessList();
+
         }
         public void FillListBox()
         {
-            
             /* ListView structure -> 0 : name, 1 : pid, 2 : char */
             List<Process> processList = processHelper.GetProcesses();
-
             foreach (Process process in processList)
             {
                 ListViewItem item = new ListViewItem();
