@@ -16,7 +16,7 @@ namespace KeyHelperForms
 
     public partial class MainForm : Form
     {
-       //Memory read and some magic.
+        //Memory read and some magic.
         const int PROCESS_WM_READ = 0x0010;
 
         [DllImport("kernel32.dll")]
@@ -25,6 +25,9 @@ namespace KeyHelperForms
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(int hProcess,
         int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
+
+
+
 
 
         //Keypress things.
@@ -47,38 +50,34 @@ namespace KeyHelperForms
 
         private void RAMReader()
         {
-
-
-            Process[] processList = Process.GetProcesses();
+            Process[] processList = Process.GetProcessesByName("PVO_Client");
 
             foreach (Process process in processList)
             {
                 ListViewItem item = new ListViewItem();
 
-                if (process.ProcessName.ToString() == "PVO_Client")
-                {
-                    IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
+                IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
 
-                    int bytesRead = 0;
-                    byte[] buffer = new byte[1024];
+                int bytesRead = 0;
+                byte[] charName = new byte[24];
 
-                    ReadProcessMemory((int)processHandle, 0x010916BF, buffer, buffer.Length, ref bytesRead);
-
-
-                    item.SubItems.Add(process.ProcessName);
-                    item.Text = process.Id.ToString();
-                    item.SubItems.Add(Encoding.ASCII.GetString(buffer));
-                    item.Tag = process;
-                    listView1.Items.Add(item);
-
-                }
+                ReadProcessMemory((int)processHandle, 0x010916BF, charName, charName.Length, ref bytesRead);
+                item.SubItems.Add(process.ProcessName);
+                item.Text = process.Id.ToString();
+                item.SubItems.Add(Encoding.ASCII.GetString(charName));
+                item.Tag = process;
+                listView1.Items.Add(item);
             }
+
+
+           
         }
 
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-        RAMReader();
+            RAMReader();
+
         }
 
 
@@ -88,6 +87,8 @@ namespace KeyHelperForms
 
         private void button_StartStop_Click(object sender, EventArgs e)
         {
+
+
             threadHelperArray.ChangeChecks(checkState);
             threadHelperArray.StartAll();
             if (!startState)
@@ -165,8 +166,9 @@ namespace KeyHelperForms
         private void btnOffset_Click(object sender, EventArgs e)
         {
             RAMReader();
-           
+
         }
+
 
     }
 }
