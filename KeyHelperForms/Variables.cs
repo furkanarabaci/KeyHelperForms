@@ -9,6 +9,7 @@ namespace KeyHelperForms
     class Variables
     {
         public static string processName = "PVO_Client";
+        public const UInt32 WM_KEYDOWN = 0x0100;
 
         public const int VK_KEY_0 = 0x30;
         public const int VK_KEY_1 = 0x31;

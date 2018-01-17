@@ -40,7 +40,7 @@
             this.checkBox_key8 = new System.Windows.Forms.CheckBox();
             this.checkBox_key9 = new System.Windows.Forms.CheckBox();
             this.checkBox_key0 = new System.Windows.Forms.CheckBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView_Characters = new System.Windows.Forms.ListView();
             this.PIDColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CharColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -174,19 +174,19 @@
             this.checkBox_key0.UseVisualStyleBackColor = true;
             this.checkBox_key0.CheckedChanged += new System.EventHandler(this.checkBox_key0_CheckedChanged);
             // 
-            // listView1
+            // listView_Characters
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listView_Characters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PIDColumn,
             this.nameColumn,
             this.CharColumn});
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(12, 58);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(284, 260);
-            this.listView1.TabIndex = 12;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView_Characters.FullRowSelect = true;
+            this.listView_Characters.Location = new System.Drawing.Point(12, 58);
+            this.listView_Characters.Name = "listView_Characters";
+            this.listView_Characters.Size = new System.Drawing.Size(284, 260);
+            this.listView_Characters.TabIndex = 12;
+            this.listView_Characters.UseCompatibleStateImageBehavior = false;
+            this.listView_Characters.View = System.Windows.Forms.View.Details;
             // 
             // PIDColumn
             // 
@@ -292,7 +292,7 @@
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.btnHide);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listView_Characters);
             this.Controls.Add(this.checkBox_key0);
             this.Controls.Add(this.checkBox_key9);
             this.Controls.Add(this.checkBox_key8);
@@ -327,7 +327,7 @@
         private System.Windows.Forms.CheckBox checkBox_key8;
         private System.Windows.Forms.CheckBox checkBox_key9;
         private System.Windows.Forms.CheckBox checkBox_key0;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listView_Characters;
         private System.Windows.Forms.ColumnHeader nameColumn;
         private System.Windows.Forms.ColumnHeader PIDColumn;
         private System.Windows.Forms.Button btnHide;

@@ -25,7 +25,7 @@ namespace KeyHelperForms
         public static extern bool ReadProcessMemory(int hProcess,
         int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
-        private string ReadAddress(Process process, int addressValue)
+        public string ReadAddress(Process process, int addressValue)
         {
             //Address value in hexadecimal. The variable address points can vary, so use it at your own risk.
             //Process process = Process.GetProcessesByName(Variables.processName)[0];
@@ -39,26 +39,9 @@ namespace KeyHelperForms
             return Encoding.ASCII.GetString(buffer);
         }
 
-        private static List<Process> GetProcesses()
+        public List<Process> GetProcesses()
         {
-            return Process.GetProcesses();
-
-            foreach (Process process in processList)
-            {
-                ListViewItem item = new ListViewItem();
-
-                if (process.ProcessName.ToString() == Variables.processName)
-                {
-                    string currentPid = process.Id.ToString();
-                    item.SubItems.Add(process.ProcessName);
-                    item.Text = currentPid;
-                    item.Tag = process;
-                    if (!DoPIDExistInListView(currentPid))
-                    {
-                        listView1.Items.Add(item);
-                    }
-                }
-            }
+            return Process.GetProcesses().ToList();
         }
 
     }

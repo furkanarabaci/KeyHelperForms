@@ -16,33 +16,28 @@ namespace KeyHelperForms
 
     public partial class MainForm : Form
     {
-
-        //Keypress things.
         bool startState = false;
         List<bool> checkState;
         KeyThreadArray threadHelperArray;
-
+        ProcessHandler processHelper;
 
         public MainForm()
         {
-
             InitializeComponent();
-            checkState = new List<bool>();
-            for (int i = 0; i < 10; i++)
-            {
-                checkState.Add(false); //I am too lazy to use LINQ.
-            }
+            checkState = Enumerable.Repeat(false, 10).ToList();
             threadHelperArray = new KeyThreadArray();
+            processHelper = new ProcessHandler();
         }
 
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            loadProcessList();
+            FillListBox();
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-
+            listView_Characters.Items.Clear(); //Also works as refresh.
+            FillListBox();
         }
 
         private void button_StartStop_Click(object sender, EventArgs e)
@@ -123,20 +118,30 @@ namespace KeyHelperForms
 
         private void btnOffset_Click(object sender, EventArgs e)
         {
-            listView1.Clear();
-            RAMReader();
-            loadProcessList();
+            listView_Characters.Clear();
+            //RAMReader();
+            //loadProcessList();
         }
-        private bool DoPIDExistInListView(string pid)
+        public void FillListBox()
         {
-            //ListView structure -> 0 : name, 1 : pid, 2 : char 
-            foreach(ListViewItem item in listView1.Items)
+            
+            /* ListView structure -> 0 : name, 1 : pid, 2 : char */
+            List<Process> processList = processHelper.GetProcesses();
+
+            foreach (Process process in processList)
             {
-                if (item.SubItems[1].ToString().Equals(pid)){
-                    return true;
+                ListViewItem item = new ListViewItem();
+
+                if (process.ProcessName.ToString() == Variables.processName)
+                {
+                    string characterName = processHelper.ReadAddress(process, Variables.characterNameAddress);
+                    string currentPid = process.Id.ToString();               
+                    item.SubItems.Add(process.ProcessName);
+                    item.SubItems.Add(characterName);
+                    item.Text = currentPid;  
+                    listView_Characters.Items.Add(item);
                 }
             }
-            return false;
         }
     }
 }
