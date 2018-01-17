@@ -130,10 +130,15 @@ namespace KeyHelperForms
 
                 if (process.ProcessName.ToString() == Variables.processName)
                 {
+                    //TODO: Here is too ugly, simplify it and move it elsewhere.
                     string characterName = processHelper.ReadAddress(process, Variables.characterNameAddress);
-                    string currentPid = process.Id.ToString();               
+                    string currentPid = process.Id.ToString();
+                    string hp = processHelper.ReadAddress(process, Variables.hpAddress);
+                    string mp = processHelper.ReadAddress(process, Variables.mpAddress);
                     item.SubItems.Add(process.ProcessName);
                     item.SubItems.Add(characterName);
+                    item.SubItems.Add(hp);
+                    item.SubItems.Add(mp);
                     item.Text = currentPid;  
                     listView_Characters.Items.Add(item);
                 }

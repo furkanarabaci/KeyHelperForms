@@ -23,9 +23,11 @@ namespace KeyHelperForms
         public const int VK_KEY_9 = 0x39;
 
         public static int sleepTime = 1000;
-        public const int bufferSize = 24; //Buffer for character name, int bytes.
+        public const int bufferSize = 24; //Buffer for various things. 
 
         public const int characterNameAddress = 0x010916BF;
+        public const int hpAddress = 0x00E70DD4;
+        public const int mpAddress = 0x00E70DD8;
         public static List<int> KeyList() //Starts from 1, ends with 0
         {
             return new List<int>
