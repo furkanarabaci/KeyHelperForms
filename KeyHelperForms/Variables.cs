@@ -23,19 +23,25 @@ namespace KeyHelperForms
             public const int VK_KEY_8 = 0x38;
             public const int VK_KEY_9 = 0x39;
         }
-
+        public struct Addresses
+        {
+            public const int characterName = 0x010916BF;
+            public const int hpMaximum = 0x00E70DD4;
+            public const int mpMaximum = 0x00E70DD8;
+        }
 
         public static int sleepTime = 1000;
 
         public const int intBufferSize = 24;
         public const int stringBufferSize = 24;
-   
-        public const int characterNameAddress = 0x010916BF;
-        public const int hpAddress = 0x00E70DD4;
-        public const int mpAddress = 0x00E70DD8;
-
-        public static string startText = "Start";
-        public static string stopText = "Stop";
+        public struct Texts
+        {
+            public static string start= "Start";
+            public static string stop= "Stop";
+            public static string stateStart = "Started";
+            public static string stateStop = "Stopped";
+        }
+        
         public static List<int> KeyList() //Starts from 1, ends with 0
         {
             return new List<int>
