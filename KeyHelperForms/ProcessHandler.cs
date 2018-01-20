@@ -10,11 +10,6 @@ namespace KeyHelperForms
 {
     class ProcessHandler
     {
-        public ProcessHandler()
-        {
-
-        }
-
         //Memory read and some magic.
         const int PROCESS_WM_READ = 0x0010;
 
