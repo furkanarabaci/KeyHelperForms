@@ -135,7 +135,7 @@ namespace KeyHelperForms
                 else
                 {
                     ActivateCheckBoxes();
-                }   
+                }
             }      
         }
         private void ChangeIndex() //Submethod for listview, only for simplification purposes.
