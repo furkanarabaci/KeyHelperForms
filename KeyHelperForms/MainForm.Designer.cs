@@ -45,6 +45,7 @@
             this.btnHide = new System.Windows.Forms.Button();
             this.btnShow = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.startStopColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button_StartStop
@@ -170,7 +171,8 @@
             // listView_Characters
             // 
             this.listView_Characters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.CharColumn});
+            this.CharColumn,
+            this.startStopColumn});
             this.listView_Characters.FullRowSelect = true;
             this.listView_Characters.Location = new System.Drawing.Point(12, 58);
             this.listView_Characters.Name = "listView_Characters";
@@ -183,7 +185,7 @@
             // CharColumn
             // 
             this.CharColumn.Text = "Char";
-            this.CharColumn.Width = 110;
+            this.CharColumn.Width = 118;
             // 
             // btnHide
             // 
@@ -214,6 +216,12 @@
             this.btnRefresh.TabIndex = 15;
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // startStopColumn
+            // 
+            this.startStopColumn.Tag = "";
+            this.startStopColumn.Text = "State";
+            this.startStopColumn.Width = 76;
             // 
             // MainForm
             // 
@@ -264,6 +272,7 @@
         private System.Windows.Forms.Button btnShow;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ColumnHeader CharColumn;
+        private System.Windows.Forms.ColumnHeader startStopColumn;
     }
 }
 
