@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KeyHelperForms
 {
-    class KeyThread
+    class KeyThread //Base class which is responsible for single key press on a single process.
     {
         Thread pressThread;
         Process targetProcess;
@@ -22,6 +22,7 @@ namespace KeyHelperForms
         public KeyThread(int pKey, Process paramProcess)
         {
             keyToPress = pKey;
+            paramProcess = targetProcess;
             RenewThread();
         }
         private void RenewThread()
