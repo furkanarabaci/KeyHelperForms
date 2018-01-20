@@ -10,9 +10,6 @@ namespace KeyHelperForms
 {
     class ProcessHandler
     {
-        //Memory read and some magic.
-        const int PROCESS_WM_READ = 0x0010;
-
         [DllImport("kernel32.dll")]
         public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
@@ -24,7 +21,7 @@ namespace KeyHelperForms
         {
             //Address value in hexadecimal. The variable address points can vary, so use it at your own risk.
             //dataType requires a value, you can pass anything as a parameter.
-            IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
+            IntPtr processHandle = OpenProcess(Variables.PROCESS_WM_READ, false, process.Id);
 
             int bytesRead = 0;
             byte[] buffer = new byte[Variables.stringBufferSize];
@@ -34,7 +31,7 @@ namespace KeyHelperForms
         }
         public int ReadIntAddress(Process process, int addressValue)
         {
-            IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
+            IntPtr processHandle = OpenProcess(Variables.PROCESS_WM_READ, false, process.Id);
 
             int bytesRead = 0;
             byte[] buffer = new byte[Variables.intBufferSize];

@@ -9,16 +9,16 @@ namespace KeyHelperForms
 {
     class CharacterHandler
     {
-        List<Character> characterList;
+        public List<Character> Characters { get; private set; }
         public CharacterHandler()
         {
-            characterList = new List<Character>();
+            Characters = new List<Character>();
         }
         public void AddCharacter(Process characterProcess)
         {
             if(FindCharacter(characterProcess.Id) == null)
             {
-                characterList.Add(new Character(characterProcess));
+                Characters.Add(new Character(characterProcess));
             }
             else
             {
@@ -35,21 +35,21 @@ namespace KeyHelperForms
             }
             else
             {
-                characterList.Remove(currentCharacterObject);
+                Characters.Remove(currentCharacterObject);
             }
             
         }
         public void StartCharacterPress(int index)
         {
-            characterList[index].StartPressing();
+            Characters[index].StartPressing();
         }
         public void StopCharacterPress(int index)
         {
-            characterList[index].StopPressing();
+            Characters[index].StopPressing();
         }
         public Character FindCharacter(int processId) //MAY RETURN NULL, BE WARY.
         {
-            foreach(Character currentChar in characterList)
+            foreach(Character currentChar in Characters)
             {
                 if(currentChar.ProcessId == processId)
                 {
@@ -60,7 +60,7 @@ namespace KeyHelperForms
         }
         public void ResetCharacters()
         {
-            characterList.Clear();
+            Characters.Clear();
         }
     }
 }
