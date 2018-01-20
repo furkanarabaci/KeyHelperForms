@@ -27,14 +27,14 @@ namespace KeyHelperForms
         }
         public void StartPressing()
         {
-            StartState = false;
+            StartState = true;
             ChangeChecks(CheckState); //KeyThreadArray function
             StartAll(); //KeyThreadArray function
 
         }
         public void StopPressing()
         {
-            StartState = true;
+            StartState = false;
             StopAll(); //KeyThreadArray function
         }
     }
