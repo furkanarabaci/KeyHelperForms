@@ -9,19 +9,19 @@ namespace KeyHelperForms
 {
     class Character : KeyThreadArray
     {
-        List<bool> checkState;
+        public List<bool> CheckState { get; set; }
         Process ClientProcess { get; }
-        bool StartState { get; set; }
+        public bool StartState { get; set; }
         public Character(Process paramProcess) : base(paramProcess)
         {
-            checkState = Enumerable.Repeat(false, 10).ToList();
+            CheckState = Enumerable.Repeat(false, 10).ToList();
             StartState = false;
             ClientProcess = paramProcess; //Gonna bind to the process
         }
         public void StartPressing()
         {
             StartState = false;
-            ChangeChecks(checkState); //KeyThreadArray function
+            ChangeChecks(CheckState); //KeyThreadArray function
             StartAll(); //KeyThreadArray function
 
         }
