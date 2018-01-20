@@ -12,8 +12,9 @@ namespace KeyHelperForms
         List<KeyThread> keyThreads; //Starts from 1, ends with 0
         List<bool> keyThreadStatuses; //Again starts from 1
         Process pressProcess;
-        public KeyThreadArray()
+        public KeyThreadArray(Process paramProcess)
         {
+            pressProcess = paramProcess;
             keyThreads = new List<KeyThread>();
             List<int> keyList = Variables.KeyList();
             for(int i = 0; i < 10; i++)
