@@ -22,7 +22,7 @@ namespace KeyHelperForms
         public KeyThread(int pKey, Process paramProcess)
         {
             keyToPress = pKey;
-            paramProcess = targetProcess;
+            targetProcess = paramProcess;
             RenewThread();
         }
         private void RenewThread()
