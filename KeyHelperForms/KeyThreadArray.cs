@@ -23,11 +23,11 @@ namespace KeyHelperForms
             }
             
         }
-        public void ChangeChecks(List<bool> checks)
+        protected void ChangeChecks(List<bool> checks)
         {
             keyThreadStatuses = checks;
         }
-        public void StartAll()
+        protected void StartAll()
         {
             for(int i = 0; i < keyThreads.Count; i++)
             {
@@ -37,7 +37,7 @@ namespace KeyHelperForms
                 }
             }
         }
-        public void StopAll()
+        protected void StopAll()
         {
             for (int i = 0; i < keyThreads.Count; i++)
             {
