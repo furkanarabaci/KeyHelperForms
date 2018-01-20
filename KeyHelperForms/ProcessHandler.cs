@@ -17,7 +17,7 @@ namespace KeyHelperForms
         public static extern bool ReadProcessMemory(int hProcess,
         int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
-        public string ReadStringAddress(Process process, int addressValue)
+        public static string ReadStringAddress(Process process, int addressValue)
         {
             //Address value in hexadecimal. The variable address points can vary, so use it at your own risk.
             //dataType requires a value, you can pass anything as a parameter.
@@ -29,7 +29,7 @@ namespace KeyHelperForms
             ReadProcessMemory((int)processHandle, addressValue, buffer, buffer.Length, ref bytesRead);
             return Encoding.UTF8.GetString(buffer); // Return string as default.
         }
-        public int ReadIntAddress(Process process, int addressValue)
+        public static int ReadIntAddress(Process process, int addressValue)
         {
             IntPtr processHandle = OpenProcess(Variables.PROCESS_WM_READ, false, process.Id);
 
@@ -48,7 +48,11 @@ namespace KeyHelperForms
             {
                 if (currentProcess.ProcessName.ToString().Equals(Variables.processName, StringComparison.InvariantCultureIgnoreCase)) 
                 {
-                    relativeProcesses.Add(currentProcess);
+                    string characterName = ReadStringAddress(currentProcess, Variables.Addresses.characterName).Replace("\0", String.Empty);
+                    if (characterName.Length > 0)
+                    {
+                        relativeProcesses.Add(currentProcess);
+                    }
                 }
             }
             return relativeProcesses;
