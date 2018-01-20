@@ -46,7 +46,7 @@ namespace KeyHelperForms
             Process[] processList = Process.GetProcesses(); //To avoid runtime issues.
             foreach (Process currentProcess in processList)
             {
-                if (currentProcess.ProcessName.ToString().Equals(Variables.processName))
+                if (currentProcess.ProcessName.ToString().Equals(Variables.processName, StringComparison.InvariantCultureIgnoreCase)) 
                 {
                     relativeProcesses.Add(currentProcess);
                 }
