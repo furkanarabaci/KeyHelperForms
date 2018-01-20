@@ -10,6 +10,7 @@ namespace KeyHelperForms
     {
         public static string processName = "PVO_Client";
         public const UInt32 WM_KEYDOWN = 0x0100;
+        public const int PROCESS_WM_READ = 0x0010;  //Memory read and some magic.
         struct Keys
         {
             public const int VK_KEY_0 = 0x30;
