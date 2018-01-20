@@ -175,12 +175,14 @@
             this.startStopColumn});
             this.listView_Characters.FullRowSelect = true;
             this.listView_Characters.Location = new System.Drawing.Point(12, 58);
+            this.listView_Characters.MultiSelect = false;
             this.listView_Characters.Name = "listView_Characters";
             this.listView_Characters.Size = new System.Drawing.Size(227, 161);
             this.listView_Characters.TabIndex = 12;
             this.listView_Characters.UseCompatibleStateImageBehavior = false;
             this.listView_Characters.View = System.Windows.Forms.View.Details;
             this.listView_Characters.SelectedIndexChanged += new System.EventHandler(this.listView_Characters_SelectedIndexChanged);
+            this.listView_Characters.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_Characters_MouseDoubleClick);
             // 
             // CharColumn
             // 
