@@ -9,14 +9,18 @@ namespace KeyHelperForms
 {
     class Character : KeyThreadArray
     {
+        ProcessHandler processHelper; //Will read various addresses and save it here.
         public List<bool> CheckState { get; set; }
         Process ClientProcess { get; }
+        public int ProcessId { get; } // This is just for ease of access
         public bool StartState { get; set; }
         public Character(Process paramProcess) : base(paramProcess)
         {
             CheckState = Enumerable.Repeat(false, 10).ToList();
             StartState = false;
             ClientProcess = paramProcess; //Gonna bind to the process
+            ProcessId = paramProcess.Id;
+            processHelper = new ProcessHandler();
         }
         public void StartPressing()
         {
