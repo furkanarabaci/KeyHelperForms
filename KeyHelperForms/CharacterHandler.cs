@@ -16,11 +16,28 @@ namespace KeyHelperForms
         }
         public void AddCharacter(Process characterProcess)
         {
-            characterList.Add(new Character(characterProcess));
+            if(FindCharacter(characterProcess.Id) == null)
+            {
+                characterList.Add(new Character(characterProcess));
+            }
+            else
+            {
+                //Means the character is already on the list, we don't want any duplicates.
+                //TODO : Empty for now, you may raise some error.
+            }
         }
         public void RemoveCharacter(Process characterProcess)
         {
-            characterList.Remove(FindProcess(characterProcess.Id));
+            Character currentCharacterObject = FindCharacter(characterProcess.Id);
+            if ( currentCharacterObject == null)
+            {
+                //Means we are trying to delete an existing object, don't do anything.
+            }
+            else
+            {
+                characterList.Remove(currentCharacterObject);
+            }
+            
         }
         public void StartCharacterPress(int index)
         {
@@ -30,7 +47,7 @@ namespace KeyHelperForms
         {
             characterList[index].StopPressing();
         }
-        protected Character FindProcess(int processId)
+        public Character FindCharacter(int processId) //MAY RETURN NULL, BE WARY.
         {
             foreach(Character currentChar in characterList)
             {
@@ -39,7 +56,7 @@ namespace KeyHelperForms
                     return currentChar;
                 }
             }
-            return null; //It usually wont reach here, just in case.
+            return null;
         }
         public void ResetCharacters()
         {
