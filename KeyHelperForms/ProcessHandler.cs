@@ -43,10 +43,18 @@ namespace KeyHelperForms
 
             return BitConverter.ToInt32(buffer, 0);
         }
-        public List<Process> GetProcesses()
+        public static List<Process> GetRelativeProcesses()
         {
-            return Process.GetProcesses().ToList();
+            List<Process> relativeProcesses = new List<Process>();
+            Process[] processList = Process.GetProcesses(); //To avoid runtime issues.
+            foreach (Process currentProcess in processList)
+            {
+                if (currentProcess.ProcessName.ToString().Equals(Variables.processName))
+                {
+                    relativeProcesses.Add(currentProcess);
+                }
+            }
+            return relativeProcesses;
         }
-
     }
 }
