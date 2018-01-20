@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.button_StartStop = new System.Windows.Forms.Button();
             this.checkBox_key1 = new System.Windows.Forms.CheckBox();
             this.checkBox_key2 = new System.Windows.Forms.CheckBox();
             this.checkBox_key3 = new System.Windows.Forms.CheckBox();
@@ -42,21 +41,12 @@
             this.checkBox_key0 = new System.Windows.Forms.CheckBox();
             this.listView_Characters = new System.Windows.Forms.ListView();
             this.CharColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.startStopColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnHide = new System.Windows.Forms.Button();
             this.btnShow = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.startStopColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label_startInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // button_StartStop
-            // 
-            this.button_StartStop.Location = new System.Drawing.Point(258, 83);
-            this.button_StartStop.Name = "button_StartStop";
-            this.button_StartStop.Size = new System.Drawing.Size(75, 23);
-            this.button_StartStop.TabIndex = 0;
-            this.button_StartStop.Text = "Start";
-            this.button_StartStop.UseVisualStyleBackColor = true;
-            this.button_StartStop.Click += new System.EventHandler(this.button_StartStop_Click);
             // 
             // checkBox_key1
             // 
@@ -187,11 +177,17 @@
             // CharColumn
             // 
             this.CharColumn.Text = "Char";
-            this.CharColumn.Width = 118;
+            this.CharColumn.Width = 132;
+            // 
+            // startStopColumn
+            // 
+            this.startStopColumn.Tag = "";
+            this.startStopColumn.Text = "State";
+            this.startStopColumn.Width = 91;
             // 
             // btnHide
             // 
-            this.btnHide.Location = new System.Drawing.Point(258, 115);
+            this.btnHide.Location = new System.Drawing.Point(259, 93);
             this.btnHide.Name = "btnHide";
             this.btnHide.Size = new System.Drawing.Size(75, 23);
             this.btnHide.TabIndex = 13;
@@ -200,7 +196,7 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(258, 144);
+            this.btnShow.Location = new System.Drawing.Point(259, 122);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(75, 23);
             this.btnShow.TabIndex = 14;
@@ -219,18 +215,22 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // startStopColumn
+            // label_startInfo
             // 
-            this.startStopColumn.Tag = "";
-            this.startStopColumn.Text = "State";
-            this.startStopColumn.Width = 76;
+            this.label_startInfo.AutoSize = true;
+            this.label_startInfo.Location = new System.Drawing.Point(259, 175);
+            this.label_startInfo.Name = "label_startInfo";
+            this.label_startInfo.Size = new System.Drawing.Size(203, 13);
+            this.label_startInfo.TabIndex = 16;
+            this.label_startInfo.Text = "Double click char name to start keyhelper";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(586, 354);
+            this.ClientSize = new System.Drawing.Size(470, 248);
+            this.Controls.Add(this.label_startInfo);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.btnHide);
@@ -245,7 +245,6 @@
             this.Controls.Add(this.checkBox_key3);
             this.Controls.Add(this.checkBox_key2);
             this.Controls.Add(this.checkBox_key1);
-            this.Controls.Add(this.button_StartStop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
@@ -257,8 +256,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button_StartStop;
         private System.Windows.Forms.CheckBox checkBox_key1;
         private System.Windows.Forms.CheckBox checkBox_key2;
         private System.Windows.Forms.CheckBox checkBox_key3;
@@ -275,6 +272,7 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ColumnHeader CharColumn;
         private System.Windows.Forms.ColumnHeader startStopColumn;
+        private System.Windows.Forms.Label label_startInfo;
     }
 }
 
