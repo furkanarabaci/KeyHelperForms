@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,14 @@ namespace KeyHelperForms
     {
         List<KeyThread> keyThreads; //Starts from 1, ends with 0
         List<bool> keyThreadStatuses; //Again starts from 1
+        Process pressProcess;
         public KeyThreadArray()
         {
             keyThreads = new List<KeyThread>();
             List<int> keyList = Variables.KeyList();
             for(int i = 0; i < 10; i++)
             {
-                keyThreads.Add(new KeyThread(keyList[i]));
+                keyThreads.Add(new KeyThread(keyList[i],pressProcess));
             }
             
         }
