@@ -10,7 +10,6 @@ namespace KeyHelperForms
     class Character : KeyThreadArray
     {
         //TODO : Add things like HP and MP, they are trivial but somehow needed.
-        ProcessHandler processHelper; //Will read various addresses and save it here.
         public List<bool> CheckState { get; set; }
         Process ClientProcess { get; }
         public int ProcessId { get; } // This is just for ease of access
@@ -22,8 +21,7 @@ namespace KeyHelperForms
             StartState = false;
             ClientProcess = paramProcess; //Gonna bind to the process
             ProcessId = paramProcess.Id;
-            processHelper = new ProcessHandler();
-            CharacterName = processHelper.ReadStringAddress(paramProcess, Variables.Addresses.characterName);
+            CharacterName = ProcessHandler.ReadStringAddress(paramProcess, Variables.Addresses.characterName);
         }
         public void StartPressing()
         {
