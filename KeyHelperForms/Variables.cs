@@ -28,6 +28,9 @@ namespace KeyHelperForms
         public const int characterNameAddress = 0x010916BF;
         public const int hpAddress = 0x00E70DD4;
         public const int mpAddress = 0x00E70DD8;
+
+        public static string startText = "Start";
+        public static string stopText = "Stop";
         public static List<int> KeyList() //Starts from 1, ends with 0
         {
             return new List<int>
