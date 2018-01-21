@@ -28,16 +28,28 @@ namespace KeyHelperForms
         }
         public void RemoveCharacter(Process characterProcess)
         {
-            Character currentCharacterObject = FindCharacter(characterProcess.Id);
+            Character currentCharacterObject = FindCharacter(characterProcess.Id); //It will return null at non existant pid.
             if ( currentCharacterObject == null)
             {
-                //Means we are trying to delete an existing object, don't do anything.
+                //Means we are trying to delete a non-existant object, don't do anything.
             }
             else
             {
                 Characters.Remove(currentCharacterObject);
             }
             
+        }
+        public void RemoveCharacter(Character objectToRemove)
+        {
+            try
+            {
+                Characters.Remove(objectToRemove);
+            }
+            catch(ArgumentNullException)
+            {
+                //Maybe raise an error, no need for now. Just don't remove null object.
+            }
+
         }
         public void StartCharacterPress(int index)
         {
