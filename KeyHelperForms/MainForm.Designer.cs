@@ -44,7 +44,6 @@
             this.startStopColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnHide = new System.Windows.Forms.Button();
             this.btnShow = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.label_startInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -187,7 +186,7 @@
             // 
             // btnHide
             // 
-            this.btnHide.Location = new System.Drawing.Point(259, 93);
+            this.btnHide.Location = new System.Drawing.Point(259, 58);
             this.btnHide.Name = "btnHide";
             this.btnHide.Size = new System.Drawing.Size(75, 23);
             this.btnHide.TabIndex = 13;
@@ -196,29 +195,17 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(259, 122);
+            this.btnShow.Location = new System.Drawing.Point(259, 87);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(75, 23);
             this.btnShow.TabIndex = 14;
             this.btnShow.Text = "Show";
             this.btnShow.UseVisualStyleBackColor = true;
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackgroundImage = global::KeyHelperForms.Properties.Resources.refresh;
-            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btnRefresh.Location = new System.Drawing.Point(259, 58);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(26, 23);
-            this.btnRefresh.TabIndex = 15;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // label_startInfo
             // 
             this.label_startInfo.AutoSize = true;
-            this.label_startInfo.Location = new System.Drawing.Point(259, 175);
+            this.label_startInfo.Location = new System.Drawing.Point(259, 140);
             this.label_startInfo.Name = "label_startInfo";
             this.label_startInfo.Size = new System.Drawing.Size(203, 13);
             this.label_startInfo.TabIndex = 16;
@@ -231,7 +218,6 @@
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(470, 248);
             this.Controls.Add(this.label_startInfo);
-            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.btnHide);
             this.Controls.Add(this.listView_Characters);
@@ -269,7 +255,6 @@
         private System.Windows.Forms.ListView listView_Characters;
         private System.Windows.Forms.Button btnHide;
         private System.Windows.Forms.Button btnShow;
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ColumnHeader CharColumn;
         private System.Windows.Forms.ColumnHeader startStopColumn;
         private System.Windows.Forms.Label label_startInfo;
