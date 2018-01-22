@@ -149,40 +149,30 @@ namespace KeyHelperForms
             }
         }
         #endregion
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            //TODO : This button is pointless, remove it and check for processes initially.
-            listView_Characters.Items.Clear(); //Also works as refresh.
-            RefreshListView();
-        }
+
         #region ListBox and submethods
         private void RefreshListView()
         {
-            /* ListView structure -> 0 : charName | 1 : state */
-            //TODO : Here is too ugly, simplify it and move it elsewhere.
-            List<Process> processList = ProcessHandler.GetRelativeProcesses();
-            foreach (Process process in processList)
+            listView_Characters.Items.Clear(); 
+            bool didProcessChange = characterHelper.RenewAndCheckForChange(ProcessHandler.GetRelativeProcesses());
+            if (didProcessChange)
             {
-                AddNewRow(process);
+                AddRowsToList(); //We don't need to refresh if we didn't change any single thing.
+            }   
+        }
+        private void AddRowsToList()
+        {
+            //ListView is strictly binded to characterHelper.Characters, so we always refresh the list when we see a change.
+            foreach(Character characterToAdd in characterHelper.Characters)
+            {
+                ListViewItem item = new ListViewItem
+                {
+                    Text = characterToAdd.CharacterName //First column refers to text, not subitems.
+                };
+                item.SubItems.Add(Variables.Texts.stateStop); //Stopped at default.
+                listView_Characters.Items.Add(item);
             }
-        }
-        private void AddNewRow(Process processToBind)
-        {
-            //Adds a new row to listview and to the characterHandler object.
-            characterHelper.AddCharacter(processToBind);
-            int characterIndex = characterHelper.Characters.Count - 1; //We know that our current process is last one added.
-            ListViewItem item = new ListViewItem
-            {
-                Text = characterHelper.Characters[characterIndex].CharacterName, //First column refers to text, not subitems.
-            };
-            item.SubItems.Add(Variables.Texts.stateStop); //Stopped at default.
-            listView_Characters.Items.Add(item);
-        }
-        private void RemoveRow(Character characterToDelete) 
-        {
-            //Removes the given row from characterHandler object. No need to delete it from listview, we are refreshing anyways.
-            //Listview items are binded to characters, that's why i am taking the object to make things easier.
-            characterHelper.RemoveCharacter(characterToDelete);
+            
         }
         private void listView_Characters_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -191,7 +181,7 @@ namespace KeyHelperForms
             if (selectedIndex == -1) //Meaning user clicked to empty space, deselecting everything.
             {
                 DeactivateCheckBoxes();
-                
+
             }
             else
             {
@@ -203,11 +193,11 @@ namespace KeyHelperForms
                 {
                     ActivateCheckBoxes();
                 }
-            }      
+            }
         }
         private void ChangeIndex() //Submethod for listview, only for simplification purposes.
         {
-            if(listView_Characters.SelectedItems.Count > 0)
+            if (listView_Characters.SelectedItems.Count > 0)
             {
                 selectedIndex = listView_Characters.SelectedItems[0].Index;
             }
@@ -235,9 +225,16 @@ namespace KeyHelperForms
                 //We will start pressing here
                 characterHelper.Characters[selectedIndex].StartPressing();
                 listView_Characters.SelectedItems[0].SubItems[1].Text = Variables.Texts.stateStart;
-                DeactivateCheckBoxes();  
+                DeactivateCheckBoxes();
             }
         }
         #endregion
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            //TODO : This button is pointless, remove it and check for processes initially.
+            
+            RefreshListView();
+        }
+        
     }
 }
