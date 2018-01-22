@@ -16,28 +16,69 @@ namespace KeyHelperForms
         }
         public void AddCharacter(Process characterProcess)
         {
-            if(FindCharacter(characterProcess.Id) == null)
+            if (FindCharacter(characterProcess.Id) == null)
             {
                 Characters.Add(new Character(characterProcess));
             }
             else
             {
                 //Means the character is already on the list, we don't want any duplicates.
-                //TODO : Empty for now, you may raise some error.
             }
         }
-        public void RemoveCharacter(Process characterProcess)
+        public void RemoveCharacter(int processId)
         {
-            Character currentCharacterObject = FindCharacter(characterProcess.Id);
-            if ( currentCharacterObject == null)
+            Character currentCharacterObject = FindCharacter(processId); //It will return null at non existant pid.
+            if (currentCharacterObject == null)
             {
-                //Means we are trying to delete an existing object, don't do anything.
+                //Means we are trying to delete a non-existant object, don't do anything.
             }
             else
             {
                 Characters.Remove(currentCharacterObject);
             }
-            
+
+        }
+        public void RemoveCharacter(Character objectToRemove)
+        {
+            try
+            {
+                Characters.Remove(objectToRemove);
+            }
+            catch (ArgumentNullException)
+            {
+                //Maybe raise an error, no need for now. Just don't remove null object.
+            }
+
+        }
+        public bool RenewAndCheckForChange(List<Process> newProcesses)
+        {
+            //TODO : I didn't like the name of the method, you could change it.
+            bool didSomethingChange = false;
+            //Check the status of every process and remove dead ones, also add the new ones.
+            for(int currentIndex = Characters.Count-1; currentIndex >= 0; currentIndex--) //There may be some dead processes. We must find them... AND DESTROY THEM !
+            {
+                try
+                {
+                    Characters[currentIndex].RefreshCharacterValues(); //If user logs to different char, this method will handle it.
+                    if (Characters[currentIndex].ClientProcess.HasExited || Characters[currentIndex].CharacterName.Equals(String.Empty))
+                    {
+                        //Means if we exited or restarted the client without logging in again.
+                        RemoveCharacter(Characters[currentIndex]); //Delete exited process. Garbage collector will handle the rest.
+                        didSomethingChange = true;
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    break; //Wisest approach i think is to stop this madness.
+                }
+
+            }
+            foreach(Process thisNewProcess in newProcesses) //After destructon, construction always comes.
+            {
+                AddCharacter(thisNewProcess); //Remember that this method handles duplicate process, do don't worry.
+                didSomethingChange = true;
+            }
+            return didSomethingChange;
         }
         public void StartCharacterPress(int index)
         {
@@ -49,9 +90,9 @@ namespace KeyHelperForms
         }
         public Character FindCharacter(int processId) //MAY RETURN NULL, BE WARY.
         {
-            foreach(Character currentChar in Characters)
+            foreach (Character currentChar in Characters)
             {
-                if(currentChar.ProcessId == processId)
+                if (currentChar.ClientProcess.Id == processId)
                 {
                     return currentChar;
                 }
@@ -61,6 +102,10 @@ namespace KeyHelperForms
         public void ResetCharacters()
         {
             Characters.Clear();
+        }
+        public int GetCharacterCount()
+        {
+            return Characters.Count;
         }
     }
 }

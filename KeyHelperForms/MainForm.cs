@@ -25,30 +25,10 @@ namespace KeyHelperForms
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            FillListView();
+            RefreshListView();
             DeactivateCheckBoxes(); //No selected items, so disabled.
         }
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            //TODO : This button is pointless, remove it and check for processes initially.
-            listView_Characters.Items.Clear(); //Also works as refresh.
-            FillListView();
-        }
-        private void ChangeCheckState(CheckBox currentCheckBox, int index)
-        {
-            if(selectedIndex == -1)
-            {
-                return; //Don't take an OutOfBoundException head on !
-            }
-            if (currentCheckBox.Checked)
-            {
-                characterHelper.Characters[selectedIndex].CheckState[index] = true;
-            }
-            else
-            {
-                characterHelper.Characters[selectedIndex].CheckState[index] = false;
-            }
-        }
+        #region CheckBoxes and submethods
         private void checkBox_key1_CheckedChanged(object sender, EventArgs e)
         {
             ChangeCheckState(checkBox_key1, 0);
@@ -97,78 +77,19 @@ namespace KeyHelperForms
         {
             ChangeCheckState(checkBox_key0, 9);
         }
-
-        private void btnOffset_Click(object sender, EventArgs e)
+        private void ChangeCheckState(CheckBox currentCheckBox, int index)
         {
-
-        }
-        public void FillListView()
-        {
-            /* ListView structure -> 0 : charName | 1 : state */
-            List<Process> processList = ProcessHandler.GetRelativeProcesses();
-            foreach (Process process in processList)
+            if (selectedIndex == -1)
             {
-                characterHelper.AddCharacter(process);
-                int characterIndex = characterHelper.Characters.Count - 1; //We now our current process is last one added.
-                ListViewItem item = new ListViewItem();
-                //TODO : Here is too ugly, simplify it and move it elsewhere.
-                item.Text = characterHelper.Characters[characterIndex].CharacterName; //First column refers to text, not subitems.
-                item.SubItems.Add(Variables.Texts.stateStop); //Stopped at default.
-                listView_Characters.Items.Add(item);
+                return; //Don't take an OutOfBoundException head on !
             }
-        }
-        private void listView_Characters_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ChangeIndex();
-            ChangeCheckBoxes();
-            if (selectedIndex == -1) //Meaning user clicked to empty space, deselecting everything.
+            if (currentCheckBox.Checked)
             {
-                DeactivateCheckBoxes();
-                
+                characterHelper.Characters[selectedIndex].CheckState[index] = true;
             }
             else
             {
-                if (characterHelper.Characters[selectedIndex].StartState)
-                {
-                    DeactivateCheckBoxes();
-                }
-                else
-                {
-                    ActivateCheckBoxes();
-                }
-            }      
-        }
-        private void ChangeIndex() //Submethod for listview, only for simplification purposes.
-        {
-            if(listView_Characters.SelectedItems.Count > 0)
-            {
-                selectedIndex = listView_Characters.SelectedItems[0].Index;
-            }
-            else
-            {
-                selectedIndex = -1;
-            }
-        }
-        private void listView_Characters_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            /* ListView structure -> 0 : charName | 1 : state */
-            /** 
-             * Again, i do SelectedIems[0] without hesitation, cuz i made MultiSelect false
-             */
-            ChangeIndex(); // We are double clicking, so it will always have one index selected.
-            if (characterHelper.Characters[selectedIndex].StartState) //Means if it is working BEFORE it is clicked.
-            {
-                //So we will stop pressing here
-                characterHelper.Characters[selectedIndex].StopPressing();
-                listView_Characters.SelectedItems[0].SubItems[1].Text = Variables.Texts.stateStop;
-                ActivateCheckBoxes();
-            }
-            else
-            {
-                //We will start pressing here
-                characterHelper.Characters[selectedIndex].StartPressing();
-                listView_Characters.SelectedItems[0].SubItems[1].Text = Variables.Texts.stateStart;
-                DeactivateCheckBoxes();  
+                characterHelper.Characters[selectedIndex].CheckState[index] = false;
             }
         }
         private void ActivateCheckBoxes()
@@ -183,7 +104,7 @@ namespace KeyHelperForms
             checkBox_key8.Enabled = true;
             checkBox_key9.Enabled = true;
             checkBox_key0.Enabled = true;
-            
+
         }
         private void DeactivateCheckBoxes()
         {
@@ -227,5 +148,93 @@ namespace KeyHelperForms
                 checkBox_key0.Checked = characterHelper.Characters[selectedIndex].CheckState[9];
             }
         }
+        #endregion
+
+        #region ListBox and submethods
+        private void RefreshListView()
+        {
+            listView_Characters.Items.Clear(); 
+            bool didProcessChange = characterHelper.RenewAndCheckForChange(ProcessHandler.GetRelativeProcesses());
+            if (didProcessChange)
+            {
+                AddRowsToList(); //We don't need to refresh if we didn't change any single thing.
+            }   
+        }
+        private void AddRowsToList()
+        {
+            //ListView is strictly binded to characterHelper.Characters, so we always refresh the list when we see a change.
+            foreach(Character characterToAdd in characterHelper.Characters)
+            {
+                ListViewItem item = new ListViewItem
+                {
+                    Text = characterToAdd.CharacterName //First column refers to text, not subitems.
+                };
+                item.SubItems.Add(Variables.Texts.stateStop); //Stopped at default.
+                listView_Characters.Items.Add(item);
+            }
+            
+        }
+        private void listView_Characters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeIndex();
+            ChangeCheckBoxes();
+            if (selectedIndex == -1) //Meaning user clicked to empty space, deselecting everything.
+            {
+                DeactivateCheckBoxes();
+
+            }
+            else
+            {
+                if (characterHelper.Characters[selectedIndex].StartState)
+                {
+                    DeactivateCheckBoxes();
+                }
+                else
+                {
+                    ActivateCheckBoxes();
+                }
+            }
+        }
+        private void ChangeIndex() //Submethod for listview, only for simplification purposes.
+        {
+            if (listView_Characters.SelectedItems.Count > 0)
+            {
+                selectedIndex = listView_Characters.SelectedItems[0].Index;
+            }
+            else
+            {
+                selectedIndex = -1;
+            }
+        }
+        private void listView_Characters_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            /* ListView structure -> 0 : charName | 1 : state */
+            /** 
+             * Again, i do SelectedIems[0] without hesitation, cuz i made MultiSelect false
+             */
+            ChangeIndex(); // We are double clicking, so it will always have one index selected.
+            if (characterHelper.Characters[selectedIndex].StartState) //Means if it is working BEFORE it is clicked.
+            {
+                //So we will stop pressing here
+                characterHelper.Characters[selectedIndex].StopPressing();
+                listView_Characters.SelectedItems[0].SubItems[1].Text = Variables.Texts.stateStop;
+                ActivateCheckBoxes();
+            }
+            else
+            {
+                //We will start pressing here
+                characterHelper.Characters[selectedIndex].StartPressing();
+                listView_Characters.SelectedItems[0].SubItems[1].Text = Variables.Texts.stateStart;
+                DeactivateCheckBoxes();
+            }
+        }
+        #endregion
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            //TODO : This button is pointless, remove it and check for processes initially.
+            
+            RefreshListView();
+        }
+        
     }
 }
