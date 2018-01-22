@@ -34,7 +34,7 @@ namespace KeyHelperForms
         public void RefreshCharacterValues()
         {
             string previousName = CharacterName;
-            CharacterName = ProcessHandler.ReadStringAddress(ClientProcess, Variables.Addresses.characterName).Replace(Variables.nullTerminator, String.Empty);
+            CharacterName = ProcessHandler.ReadStringAddress(ClientProcess, Variables.Addresses.characterName); //Listview will ignore \0, so no need to replace
             if(previousName != null && !previousName.Equals(CharacterName))
             {
                 //Means the user restarted the client and logged in to a different client.

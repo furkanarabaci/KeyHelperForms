@@ -49,7 +49,7 @@ namespace KeyHelperForms
                 if (currentProcess.ProcessName.ToString().Equals(Variables.processName, StringComparison.InvariantCultureIgnoreCase)) 
                 {
                     //TODO : Here is too messy, i strongly think that there would be a better approach.
-                    string characterName = ReadStringAddress(currentProcess, Variables.Addresses.characterName).Replace("\0", String.Empty);
+                    string characterName = ReadStringAddress(currentProcess, Variables.Addresses.characterName).Replace(Variables.nullTerminator, String.Empty);
                     if (characterName.Length > 0)
                     {
                         relativeProcesses.Add(currentProcess);
