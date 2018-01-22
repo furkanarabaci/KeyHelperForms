@@ -17,15 +17,17 @@ namespace KeyHelperForms
     public partial class MainForm : Form
     {
         CharacterHandler characterHelper;
+        ProcessThread processThread;
         int selectedIndex = -1; //Will hold the selected item, we need to do work accordingly. Invalid at default. Multiselect is disabled.
         public MainForm()
         {
             InitializeComponent();
             characterHelper = new CharacterHandler();
+
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
-            RefreshListView();
+            processThread = new ProcessThread(RefreshListView); //It starts itself.
             DeactivateCheckBoxes(); //No selected items, so disabled.
         }
         #region CheckBoxes and submethods
@@ -151,19 +153,32 @@ namespace KeyHelperForms
         #endregion
 
         #region ListBox and submethods
-        private void RefreshListView()
+        private void RefreshListView() //The method which thread executes, so value this.
         {
-            listView_Characters.Items.Clear(); 
-            bool didProcessChange = characterHelper.RenewAndCheckForChange(ProcessHandler.GetRelativeProcesses());
-            if (didProcessChange)
+            //TODO : There could be a better way. Now it works.
+            if (listView_Characters.InvokeRequired)
             {
-                AddRowsToList(); //We don't need to refresh if we didn't change any single thing.
-            }   
+                listView_Characters.Invoke((MethodInvoker)delegate ()
+                {
+                    RefreshListView();
+                });
+            }
+            else
+            {
+                
+                bool didProcessChange = characterHelper.RenewAndCheckForChange(ProcessHandler.GetRelativeProcesses());
+                if (didProcessChange)
+                {
+                    listView_Characters.Items.Clear(); //My way of refreshing.
+                    AddRowsToList(); //We don't need to refresh if we didn't change any single thing.
+                }
+            }
+
         }
         private void AddRowsToList()
         {
             //ListView is strictly binded to characterHelper.Characters, so we always refresh the list when we see a change.
-            foreach(Character characterToAdd in characterHelper.Characters)
+            foreach (Character characterToAdd in characterHelper.Characters)
             {
                 ListViewItem item = new ListViewItem
                 {
@@ -172,7 +187,7 @@ namespace KeyHelperForms
                 item.SubItems.Add(Variables.Texts.stateStop); //Stopped at default.
                 listView_Characters.Items.Add(item);
             }
-            
+
         }
         private void listView_Characters_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -229,12 +244,5 @@ namespace KeyHelperForms
             }
         }
         #endregion
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            //TODO : This button is pointless, remove it and check for processes initially.
-            
-            RefreshListView();
-        }
-        
     }
 }
