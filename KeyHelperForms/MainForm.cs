@@ -16,132 +16,215 @@ namespace KeyHelperForms
 
     public partial class MainForm : Form
     {
-        bool startState = false;
-        List<bool> checkState;
-        KeyThreadArray threadHelperArray;
-        ProcessHandler processHelper;
-
+        CharacterHandler characterHelper;
+        int selectedIndex = -1; //Will hold the selected item, we need to do work accordingly. Invalid at default. Multiselect is disabled.
         public MainForm()
         {
             InitializeComponent();
-            checkState = Enumerable.Repeat(false, 10).ToList();
-            threadHelperArray = new KeyThreadArray();
-            processHelper = new ProcessHandler();
+            characterHelper = new CharacterHandler();
         }
-
-
         private void MainForm_Load(object sender, EventArgs e)
         {
-            FillListBox();
+            FillListView();
+            DeactivateCheckBoxes(); //No selected items, so disabled.
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            //TODO : This button is pointless, remove it and check for processes initially.
             listView_Characters.Items.Clear(); //Also works as refresh.
-            FillListBox();
+            FillListView();
         }
-
-        private void button_StartStop_Click(object sender, EventArgs e)
+        private void ChangeCheckState(CheckBox currentCheckBox, int index)
         {
-            threadHelperArray.ChangeChecks(checkState);
-            threadHelperArray.StartAll();
-            if (!startState)
+            if(selectedIndex == -1)
             {
-                button_StartStop.Text = "Stop";
-                startState = true;
+                return; //Don't take an OutOfBoundException head on !
             }
-            else
-            {
-                threadHelperArray.StopAll();
-                button_StartStop.Text = "Start";
-                startState = false;
-            }
-        }
-        private void ChangeState(CheckBox currentCheckBox, int index)
-        {
             if (currentCheckBox.Checked)
             {
-                checkState[index] = true;
+                characterHelper.Characters[selectedIndex].CheckState[index] = true;
             }
             else
             {
-                checkState[index] = false;
+                characterHelper.Characters[selectedIndex].CheckState[index] = false;
             }
         }
         private void checkBox_key1_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key1, 0);
+            ChangeCheckState(checkBox_key1, 0);
         }
 
         private void checkBox_key2_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key2, 1);
+            ChangeCheckState(checkBox_key2, 1);
         }
 
         private void checkBox_key3_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key3, 2);
+            ChangeCheckState(checkBox_key3, 2);
         }
 
         private void checkBox_key4_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key4, 3);
+            ChangeCheckState(checkBox_key4, 3);
         }
 
         private void checkBox_key5_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key5, 4);
+            ChangeCheckState(checkBox_key5, 4);
         }
 
         private void checkBox_key6_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key6, 5);
+            ChangeCheckState(checkBox_key6, 5);
         }
 
         private void checkBox_key7_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key7, 6);
+            ChangeCheckState(checkBox_key7, 6);
         }
         private void checkBox_key8_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key8, 7);
+            ChangeCheckState(checkBox_key8, 7);
         }
 
         private void checkBox_key9_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key9, 8);
+            ChangeCheckState(checkBox_key9, 8);
         }
 
         private void checkBox_key0_CheckedChanged(object sender, EventArgs e)
         {
-            ChangeState(checkBox_key0, 9);
+            ChangeCheckState(checkBox_key0, 9);
         }
 
         private void btnOffset_Click(object sender, EventArgs e)
         {
 
         }
-        public void FillListBox()
+        public void FillListView()
         {
-            /* ListView structure -> 0 : name, 1 : pid, 2 : char */
-            List<Process> processList = processHelper.GetProcesses();
+            /* ListView structure -> 0 : charName | 1 : state */
+            List<Process> processList = ProcessHandler.GetRelativeProcesses();
             foreach (Process process in processList)
             {
+                characterHelper.AddCharacter(process);
+                int characterIndex = characterHelper.Characters.Count - 1; //We now our current process is last one added.
                 ListViewItem item = new ListViewItem();
-
-                if (process.ProcessName.ToString() == Variables.processName)
+                //TODO : Here is too ugly, simplify it and move it elsewhere.
+                item.Text = characterHelper.Characters[characterIndex].CharacterName; //First column refers to text, not subitems.
+                item.SubItems.Add(Variables.Texts.stateStop); //Stopped at default.
+                listView_Characters.Items.Add(item);
+            }
+        }
+        private void listView_Characters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeIndex();
+            ChangeCheckBoxes();
+            if (selectedIndex == -1) //Meaning user clicked to empty space, deselecting everything.
+            {
+                DeactivateCheckBoxes();
+                
+            }
+            else
+            {
+                if (characterHelper.Characters[selectedIndex].StartState)
                 {
-                    //TODO: Here is too ugly, simplify it and move it elsewhere.
-                    string characterName = processHelper.ReadAddress(process, Variables.characterNameAddress,String.Empty);
-                    string currentPid = process.Id.ToString();
-                    string hp = processHelper.ReadAddress(process, Variables.hpAddress, new Int32());
-                    string mp = processHelper.ReadAddress(process, Variables.mpAddress, new Int32());
-                    item.SubItems.Add(process.ProcessName);
-                    item.SubItems.Add(characterName);
-                    item.SubItems.Add(hp);
-                    item.SubItems.Add(mp);
-                    item.Text = currentPid;  
-                    listView_Characters.Items.Add(item);
+                    DeactivateCheckBoxes();
                 }
+                else
+                {
+                    ActivateCheckBoxes();
+                }
+            }      
+        }
+        private void ChangeIndex() //Submethod for listview, only for simplification purposes.
+        {
+            if(listView_Characters.SelectedItems.Count > 0)
+            {
+                selectedIndex = listView_Characters.SelectedItems[0].Index;
+            }
+            else
+            {
+                selectedIndex = -1;
+            }
+        }
+        private void listView_Characters_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            /* ListView structure -> 0 : charName | 1 : state */
+            /** 
+             * Again, i do SelectedIems[0] without hesitation, cuz i made MultiSelect false
+             */
+            ChangeIndex(); // We are double clicking, so it will always have one index selected.
+            if (characterHelper.Characters[selectedIndex].StartState) //Means if it is working BEFORE it is clicked.
+            {
+                //So we will stop pressing here
+                characterHelper.Characters[selectedIndex].StopPressing();
+                listView_Characters.SelectedItems[0].SubItems[1].Text = Variables.Texts.stateStop;
+                ActivateCheckBoxes();
+            }
+            else
+            {
+                //We will start pressing here
+                characterHelper.Characters[selectedIndex].StartPressing();
+                listView_Characters.SelectedItems[0].SubItems[1].Text = Variables.Texts.stateStart;
+                DeactivateCheckBoxes();  
+            }
+        }
+        private void ActivateCheckBoxes()
+        {
+            checkBox_key1.Enabled = true;
+            checkBox_key2.Enabled = true;
+            checkBox_key3.Enabled = true;
+            checkBox_key4.Enabled = true;
+            checkBox_key5.Enabled = true;
+            checkBox_key6.Enabled = true;
+            checkBox_key7.Enabled = true;
+            checkBox_key8.Enabled = true;
+            checkBox_key9.Enabled = true;
+            checkBox_key0.Enabled = true;
+            
+        }
+        private void DeactivateCheckBoxes()
+        {
+            checkBox_key1.Enabled = false;
+            checkBox_key2.Enabled = false;
+            checkBox_key3.Enabled = false;
+            checkBox_key4.Enabled = false;
+            checkBox_key5.Enabled = false;
+            checkBox_key6.Enabled = false;
+            checkBox_key7.Enabled = false;
+            checkBox_key8.Enabled = false;
+            checkBox_key9.Enabled = false;
+            checkBox_key0.Enabled = false;
+        }
+        private void ChangeCheckBoxes()
+        {
+            if (selectedIndex == -1)
+            {
+                checkBox_key1.Checked = false;
+                checkBox_key2.Checked = false;
+                checkBox_key3.Checked = false;
+                checkBox_key4.Checked = false;
+                checkBox_key5.Checked = false;
+                checkBox_key6.Checked = false;
+                checkBox_key7.Checked = false;
+                checkBox_key8.Checked = false;
+                checkBox_key9.Checked = false;
+                checkBox_key0.Checked = false;
+            }
+            else
+            {
+                checkBox_key1.Checked = characterHelper.Characters[selectedIndex].CheckState[0];
+                checkBox_key2.Checked = characterHelper.Characters[selectedIndex].CheckState[1];
+                checkBox_key3.Checked = characterHelper.Characters[selectedIndex].CheckState[2];
+                checkBox_key4.Checked = characterHelper.Characters[selectedIndex].CheckState[3];
+                checkBox_key5.Checked = characterHelper.Characters[selectedIndex].CheckState[4];
+                checkBox_key6.Checked = characterHelper.Characters[selectedIndex].CheckState[5];
+                checkBox_key7.Checked = characterHelper.Characters[selectedIndex].CheckState[6];
+                checkBox_key8.Checked = characterHelper.Characters[selectedIndex].CheckState[7];
+                checkBox_key9.Checked = characterHelper.Characters[selectedIndex].CheckState[8];
+                checkBox_key0.Checked = characterHelper.Characters[selectedIndex].CheckState[9];
             }
         }
     }

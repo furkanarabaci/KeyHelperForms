@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Character.cs" />
+    <Compile Include="CharacterHandler.cs" />
     <Compile Include="KeyThread.cs" />
     <Compile Include="KeyThreadArray.cs" />
     <Compile Include="MainForm.cs">

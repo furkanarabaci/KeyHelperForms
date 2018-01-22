@@ -9,18 +9,20 @@ using System.Threading.Tasks;
 
 namespace KeyHelperForms
 {
-    class KeyThread
+    class KeyThread //Base class which is responsible for single key press on a single process.
     {
         Thread pressThread;
+        Process targetProcess;
         bool state = false; //This will be changed by Start() and Stop()
-        private int key;
+        private int keyToPress;
 
         [DllImport("user32.dll")]
         static extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
 
-        public KeyThread(int pKey)
+        public KeyThread(int pKey, Process paramProcess)
         {
-            this.key = pKey;
+            keyToPress = pKey;
+            targetProcess = paramProcess;
             RenewThread();
         }
         private void RenewThread()
@@ -34,12 +36,8 @@ namespace KeyHelperForms
         {
             while (true)
             {
-                Process[] processes = Process.GetProcessesByName(Variables.processName);
-                foreach (Process proc in processes)
-                {
-                    PostMessage(proc.MainWindowHandle, Variables.WM_KEYDOWN, key, 0);
-                    Thread.Sleep(Variables.sleepTime);
-                }
+                PostMessage(targetProcess.MainWindowHandle, Variables.WM_KEYDOWN, keyToPress, 0);
+                Thread.Sleep(Variables.sleepTime);
                 if (!state)
                 {
                     break;
