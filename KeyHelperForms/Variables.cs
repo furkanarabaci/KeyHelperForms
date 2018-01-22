@@ -35,6 +35,7 @@ namespace KeyHelperForms
 
         public const int intBufferSize = 24;
         public const int stringBufferSize = 24;
+        public const string nullTerminator = "\0";
         public struct Texts
         {
             public static string start= "Start";
