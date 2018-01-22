@@ -37,7 +37,7 @@ namespace KeyHelperForms
             while (true)
             {
                 PostMessage(targetProcess.MainWindowHandle, Variables.WM_KEYDOWN, keyToPress, 0);
-                Thread.Sleep(Variables.sleepTime);
+                Thread.Sleep(Variables.allKeyDelay);
                 if (!state)
                 {
                     break;

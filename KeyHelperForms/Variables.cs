@@ -31,7 +31,9 @@ namespace KeyHelperForms
             public const int mpMaximum = 0x00E70DD8;
         }
 
-        public static int sleepTime = 1000;
+        public static int allKeyDelay = 1000;
+
+        public static int processThreadSleep = 3000; //Sleep time for process refreshing thread.
 
         public const int intBufferSize = 24;
         public const int stringBufferSize = 24;
