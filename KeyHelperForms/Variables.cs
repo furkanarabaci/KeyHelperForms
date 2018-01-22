@@ -33,10 +33,10 @@ namespace KeyHelperForms
 
         public static int allKeyDelay = 1000;
 
-        public static int processThreadSleep = 3000; //Sleep time for process refreshing thread.
+        public static int processThreadSleep = 1000; //Sleep time for process refreshing thread.
 
         public const int intBufferSize = 24;
-        public const int stringBufferSize = 24;
+        public const int stringBufferSize = 12;
         public const string nullTerminator = "\0";
         public struct Texts
         {
