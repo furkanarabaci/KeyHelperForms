@@ -55,17 +55,23 @@ namespace KeyHelperForms
             //TODO : I didn't like the name of the method, you could change it.
             bool didSomethingChange = false;
             //Check the status of every process and remove dead ones, also add the new ones.
-            foreach(Character currentCharacter in Characters) //There may be some dead processes. We must find them... AND DESTROY THEM !
+            for(int currentIndex = Characters.Count-1; currentIndex >= 0; currentIndex--) //There may be some dead processes. We must find them... AND DESTROY THEM !
             {
-                if (currentCharacter.ClientProcess.HasExited)
+                try
                 {
-                    RemoveCharacter(currentCharacter); //Delete exited process. Garbage collector will handle the rest.
-                    didSomethingChange = true;
+                    Characters[currentIndex].RefreshCharacterValues(); //If user logs to different char, this method will handle it.
+                    if (Characters[currentIndex].ClientProcess.HasExited || Characters[currentIndex].CharacterName.Equals(String.Empty))
+                    {
+                        //Means if we exited or restarted the client without logging in again.
+                        RemoveCharacter(Characters[currentIndex]); //Delete exited process. Garbage collector will handle the rest.
+                        didSomethingChange = true;
+                    }
                 }
-                if(Characters.Count == 0)
+                catch (IndexOutOfRangeException)
                 {
-                    break; //Probably better than dealing with exception.
+                    break; //Wisest approach i think is to stop this madness.
                 }
+
             }
             foreach(Process thisNewProcess in newProcesses) //After destructon, construction always comes.
             {
