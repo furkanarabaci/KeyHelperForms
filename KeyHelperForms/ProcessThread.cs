@@ -16,7 +16,7 @@ namespace KeyHelperForms
         {
             functionToInvoke = function;
             RenewThread();
-            Start(); //You might want to remove this. It starts itself cuz we won't want this thread to always be working.
+            Start(); //You might want to remove this. It starts itself cuz we want this thread to always be working.
         }
         private void RenewThread()
         {
