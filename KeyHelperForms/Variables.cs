@@ -30,7 +30,11 @@ namespace KeyHelperForms
             public const int hpMaximum = 0x00E70DD4;
             public const int mpMaximum = 0x00E70DD8;
         }
-
+        public struct WindowHandles
+        {
+            public const int hide = 0;
+            public const int show = 5;
+        }
         public static int allKeyDelay = 1000;
 
         public static int processThreadSleep = 1000; //Sleep time for process refreshing thread.
@@ -40,10 +44,12 @@ namespace KeyHelperForms
         public const string nullTerminator = "\0";
         public struct Texts
         {
-            public static string start= "Start";
-            public static string stop= "Stop";
+            public static string start = "Start";
+            public static string stop = "Stop";
             public static string stateStart = "Started";
             public static string stateStop = "Stopped";
+            public static string hide = "Hide";
+            public static string show = "Show";
         }
         
         public static List<int> KeyList() //Starts from 1, ends with 0
