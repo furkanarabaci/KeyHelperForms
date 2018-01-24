@@ -80,7 +80,7 @@ namespace KeyHelperForms
             }
             foreach (Process thisNewProcess in newProcesses) //After destructon, construction always comes.
             {
-                AddCharacter(thisNewProcess); //Remember that this method handles duplicate process, do don't worry.
+                AddCharacter(thisNewProcess); //Remember that this method handles duplicate process, so don't worry.
                 didSomethingChange = true;
             }
             return didSomethingChange;

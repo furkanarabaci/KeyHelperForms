@@ -8,7 +8,7 @@ namespace KeyHelperForms
 {
     class Variables
     {
-        public static string processName = "PVO_Client";
+        public const string processName = "PVO_Client";
         public const UInt32 WM_KEYDOWN = 0x0100;
         public const int PROCESS_WM_READ = 0x0010;  //Memory read and some magic.
         struct Keys
@@ -34,10 +34,11 @@ namespace KeyHelperForms
         {
             public const int hide = 0;
             public const int show = 5;
+            public const int restore = 9;
         }
         public static int allKeyDelay = 1000;
 
-        public static int processThreadSleep = 1000; //Sleep time for process refreshing thread.
+        public static int processThreadSleep = 5000; //Sleep time for process refreshing thread.
 
         public const int intBufferSize = 24;
         public const int stringBufferSize = 12;
