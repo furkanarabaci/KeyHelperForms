@@ -73,7 +73,12 @@ namespace KeyHelperForms
                 }
 
             }
-            foreach(Process thisNewProcess in newProcesses) //After destructon, construction always comes.
+            if(newProcesses.Count == Characters.Count && didSomethingChange == false)
+            {
+                //Means no character has been removed and no new process has arrived. It is safe to end here.
+                return false;
+            }
+            foreach (Process thisNewProcess in newProcesses) //After destructon, construction always comes.
             {
                 AddCharacter(thisNewProcess); //Remember that this method handles duplicate process, do don't worry.
                 didSomethingChange = true;
