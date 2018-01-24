@@ -42,8 +42,7 @@
             this.listView_Characters = new System.Windows.Forms.ListView();
             this.CharColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.startStopColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnHide = new System.Windows.Forms.Button();
-            this.btnShow = new System.Windows.Forms.Button();
+            this.btn_hideShow = new System.Windows.Forms.Button();
             this.label_startInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -184,23 +183,15 @@
             this.startStopColumn.Text = "State";
             this.startStopColumn.Width = 91;
             // 
-            // btnHide
+            // btn_hideShow
             // 
-            this.btnHide.Location = new System.Drawing.Point(259, 58);
-            this.btnHide.Name = "btnHide";
-            this.btnHide.Size = new System.Drawing.Size(75, 23);
-            this.btnHide.TabIndex = 13;
-            this.btnHide.Text = "Hide";
-            this.btnHide.UseVisualStyleBackColor = true;
-            // 
-            // btnShow
-            // 
-            this.btnShow.Location = new System.Drawing.Point(259, 87);
-            this.btnShow.Name = "btnShow";
-            this.btnShow.Size = new System.Drawing.Size(75, 23);
-            this.btnShow.TabIndex = 14;
-            this.btnShow.Text = "Show";
-            this.btnShow.UseVisualStyleBackColor = true;
+            this.btn_hideShow.Location = new System.Drawing.Point(259, 58);
+            this.btn_hideShow.Name = "btn_hideShow";
+            this.btn_hideShow.Size = new System.Drawing.Size(75, 23);
+            this.btn_hideShow.TabIndex = 13;
+            this.btn_hideShow.Text = "Hide";
+            this.btn_hideShow.UseVisualStyleBackColor = true;
+            this.btn_hideShow.Click += new System.EventHandler(this.btn_hideShow_Click);
             // 
             // label_startInfo
             // 
@@ -218,8 +209,7 @@
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(470, 248);
             this.Controls.Add(this.label_startInfo);
-            this.Controls.Add(this.btnShow);
-            this.Controls.Add(this.btnHide);
+            this.Controls.Add(this.btn_hideShow);
             this.Controls.Add(this.listView_Characters);
             this.Controls.Add(this.checkBox_key0);
             this.Controls.Add(this.checkBox_key9);
@@ -253,8 +243,7 @@
         private System.Windows.Forms.CheckBox checkBox_key9;
         private System.Windows.Forms.CheckBox checkBox_key0;
         private System.Windows.Forms.ListView listView_Characters;
-        private System.Windows.Forms.Button btnHide;
-        private System.Windows.Forms.Button btnShow;
+        private System.Windows.Forms.Button btn_hideShow;
         private System.Windows.Forms.ColumnHeader CharColumn;
         private System.Windows.Forms.ColumnHeader startStopColumn;
         private System.Windows.Forms.Label label_startInfo;

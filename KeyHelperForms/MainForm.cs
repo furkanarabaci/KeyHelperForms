@@ -29,6 +29,7 @@ namespace KeyHelperForms
         {
             processThread = new ProcessThread(RefreshListView); //It starts itself.
             DeactivateCheckBoxes(); //No selected items, so disabled.
+            DeactivateButtons();
         }
         #region CheckBoxes and submethods
         private void checkBox_key1_CheckedChanged(object sender, EventArgs e)
@@ -172,6 +173,10 @@ namespace KeyHelperForms
                     listView_Characters.Items.Clear(); //My way of refreshing.
                     AddRowsToList(); //We don't need to refresh if we didn't change any single thing.
                 }
+                else
+                {
+                    //Seems nothing has been changed.
+                }
             }
 
         }
@@ -193,23 +198,8 @@ namespace KeyHelperForms
         {
             ChangeIndex();
             ChangeCheckBoxes();
-            if (selectedIndex == -1) //Meaning user clicked to empty space, deselecting everything.
-            {
-                DeactivateCheckBoxes();
-
-            }
-            else
-            {
-                if (characterHelper.Characters[selectedIndex].StartState)
-                {
-                    DeactivateCheckBoxes();
-                }
-                else
-                {
-                    ActivateCheckBoxes();
-                }
-            }
-        }
+            GeneralEventInvoke();
+        } 
         private void ChangeIndex() //Submethod for listview, only for simplification purposes.
         {
             if (listView_Characters.SelectedItems.Count > 0)
@@ -244,5 +234,60 @@ namespace KeyHelperForms
             }
         }
         #endregion
+
+        private void btn_hideShow_Click(object sender, EventArgs e)
+        {
+            if(selectedIndex == -1)
+            {
+                return; //Don't click hide button if you didnt select a thing.
+            }
+            try
+            {
+                Character selectedCharacter = characterHelper.Characters[selectedIndex];
+                selectedCharacter.HideShowClient();
+                GeneralEventInvoke();
+            }
+            catch(IndexOutOfRangeException)
+            {
+
+            }
+        }
+        private void DeactivateButtons()
+        {
+            btn_hideShow.Enabled = false;
+        }
+        private void ActivateButtons()
+        {
+            btn_hideShow.Enabled = true;
+        }
+        private void GeneralEventInvoke() //ONLY CALL THIS WITH EVENTS
+        {
+            if (selectedIndex == -1) //Meaning user clicked to empty space, deselecting everything.
+            {
+                DeactivateCheckBoxes();
+                DeactivateButtons();
+            }
+            else //Open up configurations
+            {
+                Character selectedCharacter = characterHelper.Characters[selectedIndex];
+                if (selectedCharacter.StartState)
+                {
+                    DeactivateCheckBoxes();
+                }
+                else
+                {
+                    ActivateCheckBoxes();
+                }
+                ActivateButtons();
+                if (selectedCharacter.HiddenState)
+                {
+                    btn_hideShow.Text = Variables.Texts.show;
+                }
+                else
+                {
+                    btn_hideShow.Text = Variables.Texts.hide;
+                }
+            }
+        }
     }
 }
