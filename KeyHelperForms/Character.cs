@@ -10,16 +10,14 @@ namespace KeyHelperForms
 {
     class Character : KeyThreadArray
     {
-        [DllImport("User32")]
-        private static extern int ShowWindow(IntPtr hwnd, int nCmdShow);
         //TODO : Add things like HP and MP, they are trivial but somehow needed.
 
         public List<bool> CheckState { get; set; }
+        public List<int> KeyDelays { get; set; }
         public Process ClientProcess { get; }
         public bool StartState { get; private set; }
         public bool HiddenState { get; private set; }
         public string CharacterName { get; private set; }
-        private IntPtr processWindowHandle;
         public Character(Process paramProcess) : base(paramProcess)
         {
             ClientProcess = paramProcess; //Gonna bind to the process
@@ -52,6 +50,7 @@ namespace KeyHelperForms
         {
             //Will occur when the user restarts and logs in to a different char, then uses keyhelper again. If so, reset everything to initial state.
             CheckState = Enumerable.Repeat(false, 10).ToList();
+            KeyDelays = Enumerable.Repeat(1, 10).ToList(); //Our default key delay is 1 seconds.
             StartState = false;
         }
         public void HideShowClient()
@@ -68,23 +67,21 @@ namespace KeyHelperForms
         }
         public void ShowClient()
         {
-            ShowWindow(processWindowHandle, Variables.WindowHandles.show);
+            ProcessHandler.ChangeProcessState(ClientProcess.MainWindowHandle, Variables.WindowHandles.show);
             HiddenState = false;
         }
         public void HideClient()
         {
-            ShowWindow(processWindowHandle, Variables.WindowHandles.hide);
+            ProcessHandler.ChangeProcessState(ClientProcess.MainWindowHandle, Variables.WindowHandles.hide);
             HiddenState = true;
         }
         private void CheckHiddenState()
         {
-            //Checks if the client is already hidden when we open the program. Also assign handle number.
+            //Checks the state of client. Does not change anything.
             ClientProcess.Refresh();
-            IntPtr tmphwnd = ClientProcess.MainWindowHandle;
-            if (!tmphwnd.Equals(IntPtr.Zero))
+            if (!ClientProcess.MainWindowHandle.Equals(IntPtr.Zero))
             {
                 //Means the client is not hidden, save the window handle and proceed.
-                processWindowHandle = tmphwnd; //Temporary becomes permament.
                 HiddenState = false;
                 return;
             }

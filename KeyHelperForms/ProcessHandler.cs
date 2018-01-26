@@ -12,9 +12,10 @@ namespace KeyHelperForms
     {
         [DllImport("kernel32.dll")]
         public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
-
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
+        [DllImport("User32")]
+        private static extern int ShowWindow(IntPtr hwnd, int nCmdShow);
 
         public static string ReadStringAddress(Process process, int addressValue)
         {
@@ -56,6 +57,10 @@ namespace KeyHelperForms
                 }
             }
             return relativeProcesses;
+        }
+        public static void ChangeProcessState(IntPtr mainWindowHandle,int state)
+        {
+            ShowWindow(mainWindowHandle, state);
         }
     }
 }
