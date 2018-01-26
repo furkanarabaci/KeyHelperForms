@@ -239,6 +239,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key1.ValueChanged += new System.EventHandler(this.numericUpDown_key1_ValueChanged);
             // 
             // numericUpDown_key2
             // 
@@ -257,6 +258,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key2.ValueChanged += new System.EventHandler(this.numericUpDown_key2_ValueChanged);
             // 
             // numericUpDown_key3
             // 
@@ -275,6 +277,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key3.ValueChanged += new System.EventHandler(this.numericUpDown_key3_ValueChanged);
             // 
             // numericUpDown_key4
             // 
@@ -293,6 +296,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key4.ValueChanged += new System.EventHandler(this.numericUpDown_key4_ValueChanged);
             // 
             // numericUpDown_key5
             // 
@@ -311,6 +315,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key5.ValueChanged += new System.EventHandler(this.numericUpDown_key5_ValueChanged);
             // 
             // numericUpDown_key6
             // 
@@ -329,6 +334,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key6.ValueChanged += new System.EventHandler(this.numericUpDown_key6_ValueChanged);
             // 
             // numericUpDown_key7
             // 
@@ -347,6 +353,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key7.ValueChanged += new System.EventHandler(this.numericUpDown_key7_ValueChanged);
             // 
             // numericUpDown_key8
             // 
@@ -365,6 +372,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key8.ValueChanged += new System.EventHandler(this.numericUpDown_key8_ValueChanged);
             // 
             // numericUpDown_key9
             // 
@@ -383,6 +391,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key9.ValueChanged += new System.EventHandler(this.numericUpDown_key9_ValueChanged);
             // 
             // numericUpDown_key0
             // 
@@ -401,6 +410,7 @@
             0,
             0,
             0});
+            this.numericUpDown_key0.ValueChanged += new System.EventHandler(this.numericUpDown_key0_ValueChanged);
             // 
             // MainForm
             // 

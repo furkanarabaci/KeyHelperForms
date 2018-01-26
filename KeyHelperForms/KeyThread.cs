@@ -38,7 +38,7 @@ namespace KeyHelperForms
             while (true)
             {
                 PostMessage(targetProcess.MainWindowHandle, Variables.WM_KEYDOWN, keyToPress, 0);
-                Thread.Sleep(DelayTime);
+                Thread.Sleep(DelayTime * 1000); //Our key delay is in seconds. Adapt to it :)
                 if (!working)
                 {
                     break;
@@ -66,7 +66,7 @@ namespace KeyHelperForms
         {
             working = false;
             IsActive = false;
-            DelayTime = Variables.DefaultKeyDelay;
+            DelayTime = Variables.DefaultKeyDelay; 
         }
     }
 }
