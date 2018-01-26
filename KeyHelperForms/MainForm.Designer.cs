@@ -44,6 +44,26 @@
             this.startStopColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_hideShow = new System.Windows.Forms.Button();
             this.label_startInfo = new System.Windows.Forms.Label();
+            this.numericUpDown_key1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_key2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_key3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_key4 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_key5 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_key6 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_key7 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_key8 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_key9 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_key0 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key0)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox_key1
@@ -71,7 +91,7 @@
             // checkBox_key3
             // 
             this.checkBox_key3.AutoSize = true;
-            this.checkBox_key3.Location = new System.Drawing.Point(88, 12);
+            this.checkBox_key3.Location = new System.Drawing.Point(92, 12);
             this.checkBox_key3.Name = "checkBox_key3";
             this.checkBox_key3.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key3.TabIndex = 3;
@@ -82,7 +102,7 @@
             // checkBox_key4
             // 
             this.checkBox_key4.AutoSize = true;
-            this.checkBox_key4.Location = new System.Drawing.Point(126, 12);
+            this.checkBox_key4.Location = new System.Drawing.Point(134, 12);
             this.checkBox_key4.Name = "checkBox_key4";
             this.checkBox_key4.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key4.TabIndex = 4;
@@ -93,7 +113,7 @@
             // checkBox_key5
             // 
             this.checkBox_key5.AutoSize = true;
-            this.checkBox_key5.Location = new System.Drawing.Point(158, 12);
+            this.checkBox_key5.Location = new System.Drawing.Point(176, 12);
             this.checkBox_key5.Name = "checkBox_key5";
             this.checkBox_key5.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key5.TabIndex = 5;
@@ -104,7 +124,7 @@
             // checkBox_key6
             // 
             this.checkBox_key6.AutoSize = true;
-            this.checkBox_key6.Location = new System.Drawing.Point(196, 12);
+            this.checkBox_key6.Location = new System.Drawing.Point(224, 12);
             this.checkBox_key6.Name = "checkBox_key6";
             this.checkBox_key6.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key6.TabIndex = 6;
@@ -115,7 +135,7 @@
             // checkBox_key7
             // 
             this.checkBox_key7.AutoSize = true;
-            this.checkBox_key7.Location = new System.Drawing.Point(234, 12);
+            this.checkBox_key7.Location = new System.Drawing.Point(269, 12);
             this.checkBox_key7.Name = "checkBox_key7";
             this.checkBox_key7.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key7.TabIndex = 7;
@@ -126,7 +146,7 @@
             // checkBox_key8
             // 
             this.checkBox_key8.AutoSize = true;
-            this.checkBox_key8.Location = new System.Drawing.Point(272, 12);
+            this.checkBox_key8.Location = new System.Drawing.Point(315, 12);
             this.checkBox_key8.Name = "checkBox_key8";
             this.checkBox_key8.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key8.TabIndex = 8;
@@ -137,7 +157,7 @@
             // checkBox_key9
             // 
             this.checkBox_key9.AutoSize = true;
-            this.checkBox_key9.Location = new System.Drawing.Point(302, 12);
+            this.checkBox_key9.Location = new System.Drawing.Point(362, 12);
             this.checkBox_key9.Name = "checkBox_key9";
             this.checkBox_key9.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key9.TabIndex = 9;
@@ -148,7 +168,7 @@
             // checkBox_key0
             // 
             this.checkBox_key0.AutoSize = true;
-            this.checkBox_key0.Location = new System.Drawing.Point(340, 12);
+            this.checkBox_key0.Location = new System.Drawing.Point(409, 12);
             this.checkBox_key0.Name = "checkBox_key0";
             this.checkBox_key0.Size = new System.Drawing.Size(32, 17);
             this.checkBox_key0.TabIndex = 10;
@@ -162,7 +182,7 @@
             this.CharColumn,
             this.startStopColumn});
             this.listView_Characters.FullRowSelect = true;
-            this.listView_Characters.Location = new System.Drawing.Point(12, 58);
+            this.listView_Characters.Location = new System.Drawing.Point(12, 75);
             this.listView_Characters.MultiSelect = false;
             this.listView_Characters.Name = "listView_Characters";
             this.listView_Characters.Size = new System.Drawing.Size(227, 161);
@@ -185,7 +205,7 @@
             // 
             // btn_hideShow
             // 
-            this.btn_hideShow.Location = new System.Drawing.Point(259, 58);
+            this.btn_hideShow.Location = new System.Drawing.Point(259, 75);
             this.btn_hideShow.Name = "btn_hideShow";
             this.btn_hideShow.Size = new System.Drawing.Size(75, 23);
             this.btn_hideShow.TabIndex = 13;
@@ -202,12 +222,202 @@
             this.label_startInfo.TabIndex = 16;
             this.label_startInfo.Text = "Double click char name to start keyhelper";
             // 
+            // numericUpDown_key1
+            // 
+            this.numericUpDown_key1.Location = new System.Drawing.Point(8, 35);
+            this.numericUpDown_key1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key1.Name = "numericUpDown_key1";
+            this.numericUpDown_key1.ReadOnly = true;
+            this.numericUpDown_key1.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key1.TabIndex = 17;
+            this.numericUpDown_key1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_key2
+            // 
+            this.numericUpDown_key2.Location = new System.Drawing.Point(50, 35);
+            this.numericUpDown_key2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key2.Name = "numericUpDown_key2";
+            this.numericUpDown_key2.ReadOnly = true;
+            this.numericUpDown_key2.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key2.TabIndex = 18;
+            this.numericUpDown_key2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_key3
+            // 
+            this.numericUpDown_key3.Location = new System.Drawing.Point(92, 35);
+            this.numericUpDown_key3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key3.Name = "numericUpDown_key3";
+            this.numericUpDown_key3.ReadOnly = true;
+            this.numericUpDown_key3.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key3.TabIndex = 19;
+            this.numericUpDown_key3.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_key4
+            // 
+            this.numericUpDown_key4.Location = new System.Drawing.Point(134, 35);
+            this.numericUpDown_key4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key4.Name = "numericUpDown_key4";
+            this.numericUpDown_key4.ReadOnly = true;
+            this.numericUpDown_key4.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key4.TabIndex = 20;
+            this.numericUpDown_key4.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_key5
+            // 
+            this.numericUpDown_key5.Location = new System.Drawing.Point(176, 35);
+            this.numericUpDown_key5.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key5.Name = "numericUpDown_key5";
+            this.numericUpDown_key5.ReadOnly = true;
+            this.numericUpDown_key5.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key5.TabIndex = 21;
+            this.numericUpDown_key5.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_key6
+            // 
+            this.numericUpDown_key6.Location = new System.Drawing.Point(224, 35);
+            this.numericUpDown_key6.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key6.Name = "numericUpDown_key6";
+            this.numericUpDown_key6.ReadOnly = true;
+            this.numericUpDown_key6.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key6.TabIndex = 22;
+            this.numericUpDown_key6.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_key7
+            // 
+            this.numericUpDown_key7.Location = new System.Drawing.Point(269, 35);
+            this.numericUpDown_key7.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key7.Name = "numericUpDown_key7";
+            this.numericUpDown_key7.ReadOnly = true;
+            this.numericUpDown_key7.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key7.TabIndex = 23;
+            this.numericUpDown_key7.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_key8
+            // 
+            this.numericUpDown_key8.Location = new System.Drawing.Point(315, 35);
+            this.numericUpDown_key8.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key8.Name = "numericUpDown_key8";
+            this.numericUpDown_key8.ReadOnly = true;
+            this.numericUpDown_key8.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key8.TabIndex = 24;
+            this.numericUpDown_key8.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_key9
+            // 
+            this.numericUpDown_key9.Location = new System.Drawing.Point(362, 35);
+            this.numericUpDown_key9.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key9.Name = "numericUpDown_key9";
+            this.numericUpDown_key9.ReadOnly = true;
+            this.numericUpDown_key9.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key9.TabIndex = 25;
+            this.numericUpDown_key9.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDown_key0
+            // 
+            this.numericUpDown_key0.Location = new System.Drawing.Point(409, 35);
+            this.numericUpDown_key0.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_key0.Name = "numericUpDown_key0";
+            this.numericUpDown_key0.ReadOnly = true;
+            this.numericUpDown_key0.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown_key0.TabIndex = 26;
+            this.numericUpDown_key0.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(470, 248);
+            this.Controls.Add(this.numericUpDown_key0);
+            this.Controls.Add(this.numericUpDown_key9);
+            this.Controls.Add(this.numericUpDown_key8);
+            this.Controls.Add(this.numericUpDown_key7);
+            this.Controls.Add(this.numericUpDown_key6);
+            this.Controls.Add(this.numericUpDown_key5);
+            this.Controls.Add(this.numericUpDown_key4);
+            this.Controls.Add(this.numericUpDown_key3);
+            this.Controls.Add(this.numericUpDown_key2);
+            this.Controls.Add(this.numericUpDown_key1);
             this.Controls.Add(this.label_startInfo);
             this.Controls.Add(this.btn_hideShow);
             this.Controls.Add(this.listView_Characters);
@@ -227,6 +437,16 @@
             this.Text = "KeyHelper";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key0)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,6 +468,16 @@
         private System.Windows.Forms.ColumnHeader CharColumn;
         private System.Windows.Forms.ColumnHeader startStopColumn;
         private System.Windows.Forms.Label label_startInfo;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key1;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key2;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key3;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key4;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key5;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key6;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key7;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key8;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key9;
+        private System.Windows.Forms.NumericUpDown numericUpDown_key0;
     }
 }
 

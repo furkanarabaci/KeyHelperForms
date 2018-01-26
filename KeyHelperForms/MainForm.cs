@@ -23,14 +23,50 @@ namespace KeyHelperForms
         {
             InitializeComponent();
             characterHelper = new CharacterHandler();
-
         }
+        private void GeneralEventInvoke() //ONLY CALL THIS WITH EVENTS
+        {
+            if (selectedIndex == -1) //Meaning user clicked to empty space, deselecting everything.
+            {
+                DeactivateCheckBoxes();
+                DeactivateButtons();
+            }
+            else //Open up configurations
+            {
+                Character selectedCharacter = characterHelper.Characters[selectedIndex];
+                if (selectedCharacter.StartState)
+                {
+                    DeactivateCheckBoxes();
+                }
+                else
+                {
+                    ActivateCheckBoxes();
+                }
+                ActivateButtons();
+                if (selectedCharacter.HiddenState)
+                {
+                    btn_hideShow.Text = Variables.Texts.show;
+                }
+                else
+                {
+                    btn_hideShow.Text = Variables.Texts.hide;
+                }
+            }
+        }
+        #region MainForm and submethods
         private void MainForm_Load(object sender, EventArgs e)
         {
             processThread = new ProcessThread(RefreshListView); //It starts itself.
             DeactivateCheckBoxes(); //No selected items, so disabled.
             DeactivateButtons();
         }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //I had trouble with restoring hidden clients, so here i am.
+            characterHelper.ShowEveryClient();
+        }
+        #endregion
+
         #region CheckBoxes and submethods
         private void checkBox_key1_CheckedChanged(object sender, EventArgs e)
         {
@@ -235,6 +271,7 @@ namespace KeyHelperForms
         }
         #endregion
 
+        #region Button and submethods
         private void btn_hideShow_Click(object sender, EventArgs e)
         {
             if(selectedIndex == -1)
@@ -260,39 +297,7 @@ namespace KeyHelperForms
         {
             btn_hideShow.Enabled = true;
         }
-        private void GeneralEventInvoke() //ONLY CALL THIS WITH EVENTS
-        {
-            if (selectedIndex == -1) //Meaning user clicked to empty space, deselecting everything.
-            {
-                DeactivateCheckBoxes();
-                DeactivateButtons();
-            }
-            else //Open up configurations
-            {
-                Character selectedCharacter = characterHelper.Characters[selectedIndex];
-                if (selectedCharacter.StartState)
-                {
-                    DeactivateCheckBoxes();
-                }
-                else
-                {
-                    ActivateCheckBoxes();
-                }
-                ActivateButtons();
-                if (selectedCharacter.HiddenState)
-                {
-                    btn_hideShow.Text = Variables.Texts.show;
-                }
-                else
-                {
-                    btn_hideShow.Text = Variables.Texts.hide;
-                }
-            }
-        }
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //I had trouble with restoring hidden clients, so here i am.
-            characterHelper.ShowEveryClient();
-        }
+        #endregion
+        
     }
 }
