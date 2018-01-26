@@ -8,7 +8,7 @@ namespace KeyHelperForms
 {
     class Variables
     {
-        public static string processName = "PVO_Client";
+        public const string processName = "PVO_Client";
         public const UInt32 WM_KEYDOWN = 0x0100;
         public const int PROCESS_WM_READ = 0x0010;  //Memory read and some magic.
         struct Keys
@@ -30,18 +30,27 @@ namespace KeyHelperForms
             public const int hpMaximum = 0x00E70DD4;
             public const int mpMaximum = 0x00E70DD8;
         }
+        public struct WindowHandles
+        {
+            public const int hide = 0;
+            public const int show = 5;
+            public const int restore = 9;
+        }
+        public static int DefaultKeyDelay = 1; //In seconds.
 
-        public static int sleepTime = 1000;
+        public static int processThreadSleep = 5000; //Sleep time for process refreshing thread in miliseconds.
 
         public const int intBufferSize = 24;
-        public const int stringBufferSize = 24;
+        public const int stringBufferSize = 12;
         public const string nullTerminator = "\0";
         public struct Texts
         {
-            public static string start= "Start";
-            public static string stop= "Stop";
+            public static string start = "Start";
+            public static string stop = "Stop";
             public static string stateStart = "Started";
             public static string stateStop = "Stopped";
+            public static string hide = "Hide";
+            public static string show = "Show";
         }
         
         public static List<int> KeyList() //Starts from 1, ends with 0
