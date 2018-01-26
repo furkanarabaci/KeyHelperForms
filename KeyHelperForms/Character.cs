@@ -12,10 +12,6 @@ namespace KeyHelperForms
     {
         [DllImport("User32")]
         private static extern int ShowWindow(IntPtr hwnd, int nCmdShow);
-        [DllImport("User32.dll")]
-        public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string strClassName, string strWindowName);
-        [DllImport("user32.dll")]
-        private static extern int GetWindowThreadProcessId(IntPtr hWnd, out int ProcessId);
         //TODO : Add things like HP and MP, they are trivial but somehow needed.
 
         public List<bool> CheckState { get; set; }
@@ -63,17 +59,22 @@ namespace KeyHelperForms
             if (HiddenState)
             {
                 //Means windows is hidden. show it.
-                HandleWindow(Variables.WindowHandles.show);
+                ShowClient();
             }
             else
             {
-                HandleWindow(Variables.WindowHandles.hide);
+                HideClient();
             }
-            HiddenState = !HiddenState; //Invert it cuz the state is changed.
         }
-        private void HandleWindow(int state)
+        public void ShowClient()
         {
-            ShowWindow(processWindowHandle, state);
+            ShowWindow(processWindowHandle, Variables.WindowHandles.show);
+            HiddenState = false;
+        }
+        public void HideClient()
+        {
+            ShowWindow(processWindowHandle, Variables.WindowHandles.hide);
+            HiddenState = true;
         }
         private void CheckHiddenState()
         {
@@ -89,22 +90,8 @@ namespace KeyHelperForms
             }
             else
             {
-                //Means user started the program with client already hidden. We shall restore it !
-                IntPtr currentHandle = IntPtr.Zero;
-                int currentPid = 0;
-                int currentTid = 0;
-                do
-                {
-                    currentHandle = FindWindowEx(IntPtr.Zero, currentHandle, null, null); // get the window handle
-                    currentTid = GetWindowThreadProcessId(currentHandle, out currentPid); // get the process id (and thread id)
-                    if (currentPid == ClientProcess.Id) //Check if its our process
-                    {
-                        //We got our handle. Save it !
-                        processWindowHandle = currentHandle;
-                        HiddenState = true;
-                        break;
-                    }
-                } while (!currentHandle.Equals(IntPtr.Zero));
+                //TODO : Find a method to restore hidden window without a window handle.
+                HiddenState = true;
             }
             
         }

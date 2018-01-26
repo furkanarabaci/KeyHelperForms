@@ -112,5 +112,12 @@ namespace KeyHelperForms
         {
             return Characters.Count;
         }
+        public void ShowEveryClient()
+        {
+            foreach(Character currentChar in Characters)
+            {
+                currentChar.ShowClient();
+            }
+        }
     }
 }
