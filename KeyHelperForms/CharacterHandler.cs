@@ -18,7 +18,7 @@ namespace KeyHelperForms
         {
             if (FindCharacter(characterProcess.Id) == null)
             {
-                Characters.Add(new Character(characterProcess));
+                Characters.Add(new Character(characterProcess)); //Also fill with initial delay values.
             }
             else
             {

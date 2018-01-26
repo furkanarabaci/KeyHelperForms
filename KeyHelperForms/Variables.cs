@@ -36,7 +36,7 @@ namespace KeyHelperForms
             public const int show = 5;
             public const int restore = 9;
         }
-        public static int allKeyDelay = 1000;
+        public static int DefaultKeyDelay = 1000;
 
         public static int processThreadSleep = 5000; //Sleep time for process refreshing thread.
 

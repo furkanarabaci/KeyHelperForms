@@ -11,23 +11,24 @@ namespace KeyHelperForms
 {
     class KeyThread //Base class which is responsible for single key press on a single process.
     {
-        Thread pressThread;
-        Process targetProcess;
-        bool state = false; //This will be changed by Start() and Stop()
-        private int keyToPress;
-
         [DllImport("user32.dll")]
         static extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
-
+        private int keyToPress;
+        private Process targetProcess;
+        private bool working; //This will be changed by Start() and Stop()
+        public Thread PressThread { get; private set; }
+        public bool IsActive { get; set; } //This will be set only from outside ( from checkbox selected )
+        public int DelayTime { get; set; } //Should be minimum 1. Will be set from outside
         public KeyThread(int pKey, Process paramProcess)
         {
             keyToPress = pKey;
             targetProcess = paramProcess;
+            RenewValues();
             RenewThread();
         }
         private void RenewThread()
         {
-            pressThread = new Thread(new ThreadStart(MainThread))
+            PressThread = new Thread(new ThreadStart(MainThread))
             {
                 IsBackground = true
             };
@@ -37,33 +38,35 @@ namespace KeyHelperForms
             while (true)
             {
                 PostMessage(targetProcess.MainWindowHandle, Variables.WM_KEYDOWN, keyToPress, 0);
-                Thread.Sleep(Variables.allKeyDelay);
-                if (!state)
+                Thread.Sleep(DelayTime);
+                if (!working)
                 {
                     break;
                 }
             }
         }
-        public bool IsThreadWorking()
-        {
-            return pressThread.IsAlive;
-        }
         public void Start()
         {
-            if (!state)
+            if (!working && IsActive)
             {
                 RenewThread();
-                pressThread.Start();
-            }
-            state = true;
+                PressThread.Start();
+                working = true;
+            }         
         }
         public void Stop()
         {
-            if (state)
+            if (working)
             {
-                pressThread.Abort();
-            }
-            state = false;
+                PressThread.Abort();
+                working = false;
+            }      
+        }
+        public void RenewValues()
+        {
+            working = false;
+            IsActive = false;
+            DelayTime = Variables.DefaultKeyDelay;
         }
     }
 }

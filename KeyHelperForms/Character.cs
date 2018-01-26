@@ -8,33 +8,41 @@ using System.Threading.Tasks;
 
 namespace KeyHelperForms
 {
-    class Character : KeyThreadArray
+    class Character
     {
         //TODO : Add things like HP and MP, they are trivial but somehow needed.
-
-        public List<bool> CheckState { get; set; }
-        public List<int> KeyDelays { get; set; }
-        public Process ClientProcess { get; }
+        public List<KeyThread> KeyThreads { get; private set; } //Starts from 1 and ends with 0
+        public Process ClientProcess { get; } //Will be set initially and will be bound until the end.
         public bool StartState { get; private set; }
         public bool HiddenState { get; private set; }
         public string CharacterName { get; private set; }
-        public Character(Process paramProcess) : base(paramProcess)
+        public Character(Process paramProcess)
         {
             ClientProcess = paramProcess; //Gonna bind to the process
-            RefreshProcess();
+            KeyThreads = new List<KeyThread>();
+            foreach (int keys in Variables.KeyList())
+            {
+                KeyThreads.Add(new KeyThread(keys, paramProcess));
+            }
+            DefaultValues();
             RefreshCharacterValues();
             CheckHiddenState();
         }
         public void StartPressing()
         {
             StartState = true;
-            ChangeChecks(CheckState); //KeyThreadArray function
-            StartAll(); //KeyThreadArray function
+            foreach(KeyThread currentKey in KeyThreads)
+            {
+                currentKey.Start(); //Will ignore non-active keys.
+            }
         }
         public void StopPressing()
         {
             StartState = false;
-            StopAll(); //KeyThreadArray function
+            foreach (KeyThread currentKey in KeyThreads)
+            {
+                currentKey.Stop();
+            }
         }
         public void RefreshCharacterValues()
         {
@@ -43,14 +51,15 @@ namespace KeyHelperForms
             if(previousName != null && !previousName.Equals(CharacterName))
             {
                 //Means the user restarted the client and logged in to a different client.
-                RefreshProcess();
+                DefaultValues();
             }
         }
-        private void RefreshProcess()
+        public void DefaultValues()
         {
-            //Will occur when the user restarts and logs in to a different char, then uses keyhelper again. If so, reset everything to initial state.
-            CheckState = Enumerable.Repeat(false, 10).ToList();
-            KeyDelays = Enumerable.Repeat(1, 10).ToList(); //Our default key delay is 1 seconds.
+            foreach(KeyThread currentKey in KeyThreads)
+            {
+                currentKey.RenewValues(); //Set things to initial state.
+            }
             StartState = false;
         }
         public void HideShowClient()

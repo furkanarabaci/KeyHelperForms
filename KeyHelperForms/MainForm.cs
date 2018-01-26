@@ -124,11 +124,11 @@ namespace KeyHelperForms
             }
             if (currentCheckBox.Checked)
             {
-                characterHelper.Characters[selectedIndex].CheckState[index] = true;
+                characterHelper.Characters[selectedIndex].KeyThreads[index].IsActive = true;
             }
             else
             {
-                characterHelper.Characters[selectedIndex].CheckState[index] = false;
+                characterHelper.Characters[selectedIndex].KeyThreads[index].IsActive = false;
             }
         }
         private void ActivateCheckBoxes()
@@ -175,16 +175,16 @@ namespace KeyHelperForms
             }
             else
             {
-                checkBox_key1.Checked = characterHelper.Characters[selectedIndex].CheckState[0];
-                checkBox_key2.Checked = characterHelper.Characters[selectedIndex].CheckState[1];
-                checkBox_key3.Checked = characterHelper.Characters[selectedIndex].CheckState[2];
-                checkBox_key4.Checked = characterHelper.Characters[selectedIndex].CheckState[3];
-                checkBox_key5.Checked = characterHelper.Characters[selectedIndex].CheckState[4];
-                checkBox_key6.Checked = characterHelper.Characters[selectedIndex].CheckState[5];
-                checkBox_key7.Checked = characterHelper.Characters[selectedIndex].CheckState[6];
-                checkBox_key8.Checked = characterHelper.Characters[selectedIndex].CheckState[7];
-                checkBox_key9.Checked = characterHelper.Characters[selectedIndex].CheckState[8];
-                checkBox_key0.Checked = characterHelper.Characters[selectedIndex].CheckState[9];
+                checkBox_key1.Checked = characterHelper.Characters[selectedIndex].KeyThreads[0].IsActive;
+                checkBox_key2.Checked = characterHelper.Characters[selectedIndex].KeyThreads[1].IsActive;
+                checkBox_key3.Checked = characterHelper.Characters[selectedIndex].KeyThreads[2].IsActive;
+                checkBox_key4.Checked = characterHelper.Characters[selectedIndex].KeyThreads[3].IsActive;
+                checkBox_key5.Checked = characterHelper.Characters[selectedIndex].KeyThreads[4].IsActive;
+                checkBox_key6.Checked = characterHelper.Characters[selectedIndex].KeyThreads[5].IsActive;
+                checkBox_key7.Checked = characterHelper.Characters[selectedIndex].KeyThreads[6].IsActive;
+                checkBox_key8.Checked = characterHelper.Characters[selectedIndex].KeyThreads[7].IsActive;
+                checkBox_key9.Checked = characterHelper.Characters[selectedIndex].KeyThreads[8].IsActive;
+                checkBox_key0.Checked = characterHelper.Characters[selectedIndex].KeyThreads[9].IsActive;
             }
         }
         #endregion
