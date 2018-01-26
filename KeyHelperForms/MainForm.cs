@@ -289,5 +289,10 @@ namespace KeyHelperForms
                 }
             }
         }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //I had trouble with restoring hidden clients, so here i am.
+            characterHelper.ShowEveryClient();
+        }
     }
 }
