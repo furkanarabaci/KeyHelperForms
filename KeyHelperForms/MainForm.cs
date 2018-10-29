@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Diagnostics;
 
@@ -19,34 +18,98 @@ namespace KeyHelperForms
         CharacterHandler characterHelper;
         ProcessThread processThread;
         NotifyIcon notifyIcon = new NotifyIcon();
+        HotkeyHandler startHandler;
+        HotkeyHandler stopHandler;
         int selectedIndex = -1; //Will hold the selected item, we need to do work accordingly. Invalid at default. Multiselect is disabled.
+        bool isBalloonShown = false;
         public MainForm()
         {
             InitializeComponent();
             characterHelper = new CharacterHandler();
             Resize += ImportStatusForm_Resize;
+
             notifyIcon.DoubleClick += notifyIcon_MouseDoubleClick;
             notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             notifyIcon.BalloonTipTitle = "Minimize to tray";
             notifyIcon.BalloonTipText = "You can still access application by doubleclicking this icon";
             notifyIcon.Icon = Icon;
 
+            startHandler = new HotkeyHandler(Constants.NOMOD, Keys.F5, this);
+            stopHandler = new HotkeyHandler(Constants.NOMOD, Keys.F6, this);
         }
-
+        #region start/stop keyhelper
+        private void StartSinglePress(Character currentCharacter)
+        {
+            if (!currentCharacter.StartState)
+            {
+                currentCharacter.StartPressing();
+            }
+        }
+        private void StopSinglePress(Character currentCharacter)
+        {
+            if (currentCharacter.StartState)
+            {
+                currentCharacter.StopPressing();
+            }
+            
+        }
+        private void StartAllPress()
+        {
+            foreach (ListViewItem currentItem in listView_Characters.Items)
+            {
+                currentItem.SubItems[1].Text = Variables.Texts.stateStart;
+            }
+            foreach (Character indexCharacter in characterHelper.Characters)
+            {
+                StartSinglePress(indexCharacter);
+            }
+            DeactivateCheckBoxes();
+            DeactivateNumerics();
+        }
+        private void StopAllPress()
+        {
+            foreach (ListViewItem currentItem in listView_Characters.Items)
+            {
+                currentItem.SubItems[1].Text = Variables.Texts.stateStop;
+            }
+            foreach (Character indexCharacter in characterHelper.Characters)
+            {
+                StopSinglePress(indexCharacter);
+            }
+            ActivateCheckBoxes();
+            ActivateNumerics();
+        }
+        #endregion
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                if(m.WParam.ToInt32() == startHandler.id)
+                {
+                    StartAllPress();         
+                }
+                if (m.WParam.ToInt32() == stopHandler.id)
+                {
+                    StopAllPress();
+                }
+            }
+            base.WndProc(ref m);
+        }
         private void notifyIcon_MouseDoubleClick(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
             ShowInTaskbar = true;
-            notifyIcon.Visible = false;
+            notifyIcon.Visible = false; // TODO: Move the notifyIcon handler to somewhere else.
         }
 
         private void ImportStatusForm_Resize(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized && !isBalloonShown)
             {
                 notifyIcon.Visible = true;
                 notifyIcon.ShowBalloonTip(3000);
                 ShowInTaskbar = false;
+                isBalloonShown = true;
             }
         }
 
@@ -86,11 +149,30 @@ namespace KeyHelperForms
             DeactivateCheckBoxes(); //No selected items, so disabled.
             DeactivateButtons();
             DeactivateNumerics();
+            try
+            {
+                startHandler.Register();
+                stopHandler.Register();
+            }
+            catch(Exception ex)
+            {
+                // TODO: Do stuff with exception
+            }
+            
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             //I had trouble with restoring hidden clients, so here i am.
             characterHelper.ShowEveryClient();
+            try
+            {
+                startHandler.UnRegister();
+                stopHandler.UnRegister();
+            }
+            catch (Exception ex)
+            {
+                // TODO: Do stuff with exception
+            }
         }
         #endregion
 
@@ -279,22 +361,21 @@ namespace KeyHelperForms
         {
             /* ListView structure -> 0 : charName | 1 : state */
             /** 
-             * Again, i do SelectedIems[0] without hesitation, cuz i made MultiSelect false
+             * Again, i do SelectedIems[0] without hesitation, because i made MultiSelect false
              */
             ChangeIndex(); // We are double clicking, so it will always have one index selected.
-            if (characterHelper.Characters[selectedIndex].StartState) //Means if it is working BEFORE it is clicked.
+            Character currentCharacter = characterHelper.Characters[selectedIndex];
+            if (currentCharacter.StartState) //Means if it is working BEFORE it is clicked.
             {
-                //So we will stop pressing here
-                characterHelper.Characters[selectedIndex].StopPressing();
                 listView_Characters.SelectedItems[0].SubItems[1].Text = Variables.Texts.stateStop;
+                StopSinglePress(currentCharacter);
                 ActivateCheckBoxes();
                 ActivateNumerics();
             }
             else
             {
-                //We will start pressing here
-                characterHelper.Characters[selectedIndex].StartPressing();
                 listView_Characters.SelectedItems[0].SubItems[1].Text = Variables.Texts.stateStart;
+                StartSinglePress(currentCharacter);
                 DeactivateCheckBoxes();
                 DeactivateNumerics();
             }
@@ -339,7 +420,10 @@ namespace KeyHelperForms
             }
             else
             {
-                ActivateNumerics();
+                if (!characterHelper.Characters[selectedIndex].StartState)
+                {
+                    ActivateNumerics(); // Only activate if our selected character is not started to press.
+                }
                 numericUpDown_key1.Value = characterHelper.Characters[selectedIndex].KeyThreads[0].DelayTime;
                 numericUpDown_key2.Value = characterHelper.Characters[selectedIndex].KeyThreads[1].DelayTime;
                 numericUpDown_key3.Value = characterHelper.Characters[selectedIndex].KeyThreads[2].DelayTime;
