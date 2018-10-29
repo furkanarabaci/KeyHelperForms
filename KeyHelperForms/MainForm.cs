@@ -18,12 +18,38 @@ namespace KeyHelperForms
     {
         CharacterHandler characterHelper;
         ProcessThread processThread;
+        NotifyIcon notifyIcon = new NotifyIcon();
         int selectedIndex = -1; //Will hold the selected item, we need to do work accordingly. Invalid at default. Multiselect is disabled.
         public MainForm()
         {
             InitializeComponent();
             characterHelper = new CharacterHandler();
+            Resize += ImportStatusForm_Resize;
+            notifyIcon.DoubleClick += notifyIcon_MouseDoubleClick;
+            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon.BalloonTipTitle = "Minimize to tray";
+            notifyIcon.BalloonTipText = "You can still access application by doubleclicking this icon";
+            notifyIcon.Icon = Icon;
+
         }
+
+        private void notifyIcon_MouseDoubleClick(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal;
+            ShowInTaskbar = true;
+            notifyIcon.Visible = false;
+        }
+
+        private void ImportStatusForm_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                notifyIcon.Visible = true;
+                notifyIcon.ShowBalloonTip(3000);
+                ShowInTaskbar = false;
+            }
+        }
+
         private void GeneralEventInvoke() //ONLY CALL THIS WITH EVENTS
         {
             if (selectedIndex == -1) //Meaning user clicked to an empty space, deselecting everything.
