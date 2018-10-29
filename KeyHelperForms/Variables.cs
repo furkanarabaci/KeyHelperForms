@@ -49,8 +49,8 @@ namespace KeyHelperForms
             public static string stop = "Stop";
             public static string stateStart = "Started";
             public static string stateStop = "Stopped";
-            public static string hide = "Hide";
-            public static string show = "Show";
+            public static string hide = "Hide Client";
+            public static string show = "Show Client";
         }
         
         public static List<int> KeyList() //Starts from 1, ends with 0
