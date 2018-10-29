@@ -1,2 +1,2 @@
 # KeyHelperForms
-A KeyHelper program that presses keys whether it has focus or not
+An inofficial but approved key helper for (Warriors Way Online)[http://warriorsway.eu].
