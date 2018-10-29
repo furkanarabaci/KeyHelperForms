@@ -42,7 +42,7 @@ namespace KeyHelperForms
 
         private void ImportStatusForm_Resize(object sender, EventArgs e)
         {
-            if (.WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized)
             {
                 notifyIcon.Visible = true;
                 notifyIcon.ShowBalloonTip(3000);
