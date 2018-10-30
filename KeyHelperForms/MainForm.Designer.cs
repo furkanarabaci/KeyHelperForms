@@ -54,6 +54,8 @@
             this.numericUpDown_key8 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_key9 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_key0 = new System.Windows.Forms.NumericUpDown();
+            this.label_keyInfo = new System.Windows.Forms.Label();
+            this.label_adminInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key3)).BeginInit();
@@ -209,14 +211,14 @@
             this.btn_hideShow.Name = "btn_hideShow";
             this.btn_hideShow.Size = new System.Drawing.Size(75, 23);
             this.btn_hideShow.TabIndex = 13;
-            this.btn_hideShow.Text = "Hide";
+            this.btn_hideShow.Text = "Hide Client";
             this.btn_hideShow.UseVisualStyleBackColor = true;
             this.btn_hideShow.Click += new System.EventHandler(this.btn_hideShow_Click);
             // 
             // label_startInfo
             // 
             this.label_startInfo.AutoSize = true;
-            this.label_startInfo.Location = new System.Drawing.Point(259, 140);
+            this.label_startInfo.Location = new System.Drawing.Point(249, 113);
             this.label_startInfo.Name = "label_startInfo";
             this.label_startInfo.Size = new System.Drawing.Size(203, 13);
             this.label_startInfo.TabIndex = 16;
@@ -412,12 +414,32 @@
             0});
             this.numericUpDown_key0.ValueChanged += new System.EventHandler(this.numericUpDown_key0_ValueChanged);
             // 
+            // label_keyInfo
+            // 
+            this.label_keyInfo.AutoSize = true;
+            this.label_keyInfo.Location = new System.Drawing.Point(249, 167);
+            this.label_keyInfo.Name = "label_keyInfo";
+            this.label_keyInfo.Size = new System.Drawing.Size(111, 13);
+            this.label_keyInfo.TabIndex = 27;
+            this.label_keyInfo.Text = "F5 to Start, F6 to Stop";
+            // 
+            // label_adminInfo
+            // 
+            this.label_adminInfo.AutoSize = true;
+            this.label_adminInfo.Location = new System.Drawing.Point(249, 223);
+            this.label_adminInfo.Name = "label_adminInfo";
+            this.label_adminInfo.Size = new System.Drawing.Size(213, 13);
+            this.label_adminInfo.TabIndex = 28;
+            this.label_adminInfo.Text = "Note : Launch as Administrator for it to work";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(470, 248);
+            this.Controls.Add(this.label_adminInfo);
+            this.Controls.Add(this.label_keyInfo);
             this.Controls.Add(this.numericUpDown_key0);
             this.Controls.Add(this.numericUpDown_key9);
             this.Controls.Add(this.numericUpDown_key8);
@@ -488,6 +510,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_key8;
         private System.Windows.Forms.NumericUpDown numericUpDown_key9;
         private System.Windows.Forms.NumericUpDown numericUpDown_key0;
+        private System.Windows.Forms.Label label_keyInfo;
+        private System.Windows.Forms.Label label_adminInfo;
     }
 }
 
