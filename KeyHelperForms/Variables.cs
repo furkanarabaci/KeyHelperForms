@@ -8,7 +8,7 @@ namespace KeyHelperForms
 {
     class Variables
     {
-        public const string processName = "PVO_Client";
+        public const string processName = "PVO_START_C";
         public const UInt32 WM_KEYDOWN = 0x0100;
         public const int PROCESS_WM_READ = 0x0010;  //Memory read and some magic.
         struct Keys
