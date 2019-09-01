@@ -1,9 +1,6 @@
 name: .NET Core CI
 
-on: 
-  push:
-    branches:
-      - master
+on: [push]
 jobs:
   build:
 
@@ -17,3 +14,8 @@ jobs:
         dotnet-version: 3.0.100-preview8-013656
     - name: Build with dotnet
       run: dotnet build KeyHelperForms\KeyHelperForms.csproj --configuration Release
+      if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: KeyHelperForms/obj/Release/netcoreapp3.0/KeyHelperForms.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
