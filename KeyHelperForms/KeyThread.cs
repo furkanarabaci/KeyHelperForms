@@ -56,11 +56,7 @@ namespace KeyHelperForms
         }
         public void Stop()
         {
-            if (working)
-            {
-                PressThread.Abort();
-                working = false;
-            }      
+            working = false;     
         }
         public void RenewValues()
         {
