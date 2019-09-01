@@ -15,8 +15,9 @@ jobs:
     - name: Build with dotnet
       run: dotnet build KeyHelperForms\KeyHelperForms.csproj --configuration Release
     - name: Release
-      uses: JasonEtco/upload-to-release@master
+      uses: hopify/upload-to-release
       with:
-        args: "KeyHelperForms/obj/Release/netcoreapp3.0/KeyHelperForms.exe application/vnd.microsoft.portable-executable"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: "KeyHelperForms"
+        path: "KeyHelperForms/obj/Release/netcoreapp3.0/KeyHelperForms.exe"
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        content-type: "application/vnd.microsoft.portable-executable"
