@@ -14,12 +14,12 @@ jobs:
         dotnet-version: 3.0.100-preview8-013656
     - name: Build with dotnet
       run: dotnet build KeyHelperForms\KeyHelperForms.csproj --configuration Release
-      name: Compress
+    - name: Compress
       run: zip –d KeyHelperForms.zip KeyHelperForms/obj/Release/netcoreapp3.0/KeyHelperForms.exe
-      name: Release
+    - name: Release
       uses: docker://softprops/action-gh-release
       if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: KeyHelperForms.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: KeyHelperForms.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
