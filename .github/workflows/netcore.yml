@@ -14,10 +14,3 @@ jobs:
         dotnet-version: 3.0.100-preview8-013656
     - name: Build with dotnet
       run: dotnet build KeyHelperForms\KeyHelperForms.csproj --configuration Release
-    - name: Release
-      uses: shopify/upload-to-release@master
-      with:
-        name: "KeyHelperForms"
-        path: "KeyHelperForms/obj/Release/netcoreapp3.0/KeyHelperForms.exe"
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        content-type: "application/vnd.microsoft.portable-executable"
