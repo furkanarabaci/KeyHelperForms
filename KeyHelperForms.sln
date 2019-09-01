@@ -1,9 +1,8 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyHelperForms", "KeyHelperForms\KeyHelperForms.csproj", "{3346A5A8-D4AC-45DE-8E54-81369D896144}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyHelperForms", "KeyHelperForms\KeyHelperForms.csproj", "{3346A5A8-D4AC-45DE-8E54-81369D896144}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
