@@ -29,7 +29,7 @@ namespace KeyHelperForms
         }
         private void MainThread()
         {
-            while (true)
+            while (state)
             {
                 functionToInvoke();
                 Thread.Sleep(Variables.processThreadSleep);
@@ -50,10 +50,6 @@ namespace KeyHelperForms
         }
         public void Stop()
         {
-            if (state)
-            {
-                procThread.Abort();
-            }
             state = false;
         }
     }
