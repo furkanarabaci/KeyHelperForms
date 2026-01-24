@@ -56,6 +56,7 @@
             this.numericUpDown_key0 = new System.Windows.Forms.NumericUpDown();
             this.label_keyInfo = new System.Windows.Forms.Label();
             this.label_adminInfo = new System.Windows.Forms.Label();
+            this.btn_refresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_key3)).BeginInit();
@@ -184,6 +185,7 @@
             this.CharColumn,
             this.startStopColumn});
             this.listView_Characters.FullRowSelect = true;
+            this.listView_Characters.HideSelection = false;
             this.listView_Characters.Location = new System.Drawing.Point(12, 75);
             this.listView_Characters.MultiSelect = false;
             this.listView_Characters.Name = "listView_Characters";
@@ -432,12 +434,23 @@
             this.label_adminInfo.TabIndex = 28;
             this.label_adminInfo.Text = "Note : Launch as Administrator for it to work";
             // 
+            // btn_refresh
+            // 
+            this.btn_refresh.Location = new System.Drawing.Point(362, 75);
+            this.btn_refresh.Name = "btn_refresh";
+            this.btn_refresh.Size = new System.Drawing.Size(75, 23);
+            this.btn_refresh.TabIndex = 29;
+            this.btn_refresh.Text = "Refresh";
+            this.btn_refresh.UseVisualStyleBackColor = true;
+            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(470, 248);
+            this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.label_adminInfo);
             this.Controls.Add(this.label_keyInfo);
             this.Controls.Add(this.numericUpDown_key0);
@@ -512,6 +525,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_key0;
         private System.Windows.Forms.Label label_keyInfo;
         private System.Windows.Forms.Label label_adminInfo;
+        private System.Windows.Forms.Button btn_refresh;
     }
 }
 

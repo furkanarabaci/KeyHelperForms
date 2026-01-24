@@ -408,6 +408,26 @@ namespace KeyHelperForms
         {
             btn_hideShow.Enabled = true;
         }
+
+        private void btn_refresh_Click(object sender, EventArgs e)
+        {
+            // Force an immediate scan of processes and refresh the UI.
+            List<Process> processes = ProcessHandler.GetRelativeProcesses();
+            bool didProcessChange = characterHelper.RenewAndCheckForChange(processes);
+
+            // Rebuild list view so names (and any added/removed processes) are shown immediately.
+            listView_Characters.Items.Clear();
+            AddRowsToList();
+
+            // Ensure UI state matches selection (clear selection if nothing exists).
+            if (listView_Characters.Items.Count == 0)
+            {
+                selectedIndex = -1;
+                DeactivateCheckBoxes();
+                DeactivateButtons();
+                ResetNumerics();
+            }
+        }
         #endregion
 
         #region NumericUpDown and submethods
@@ -534,5 +554,6 @@ namespace KeyHelperForms
             NumericUpDownValueChangedHandle(numericUpDown_key0, 9);
         }
         #endregion
+
     }
 }

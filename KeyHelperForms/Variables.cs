@@ -8,7 +8,7 @@ namespace KeyHelperForms
 {
     class Variables
     {
-        public const string processName = "PVO_START_C";
+        public static readonly string[] processNames = { "Client_BUL", "Client_ENG" };
         public const UInt32 WM_KEYDOWN = 0x0100;
         public const int PROCESS_WM_READ = 0x0010;  //Memory read and some magic.
         struct Keys
@@ -26,7 +26,7 @@ namespace KeyHelperForms
         }
         public struct Addresses
         {
-            public const int characterName = 0x010916BF;
+            public const int characterName = 0x010916C1;
             public const int hpMaximum = 0x00E70DD4;
             public const int mpMaximum = 0x00E70DD8;
         }
